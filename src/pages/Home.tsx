@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { HStack } from '@chakra-ui/react'
-import DataTable from './components/table'
+import DataTable from '../components/table'
 
 export interface userData {
   identificador: string
@@ -49,7 +49,7 @@ const mockData = [
 ]
 
 
-function App() {
+const Home = () => {
   const [data,] = useState(mockData)
 
   return (
@@ -59,4 +59,4 @@ function App() {
   )
 }
 
-export default App
+export default Home

@@ -1,4 +1,3 @@
-
 import {
   Table,
   Thead,
@@ -13,10 +12,9 @@ import {
   MenuList,
   MenuItem,
 } from '@chakra-ui/react'
-
-
-import { userData } from '../App'
+import { userData } from '../pages/Home'
 import { MoreHorizontal } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 export interface TableProps {
   data: userData[]
@@ -50,9 +48,19 @@ const DataTable = ({ data }: TableProps) => {
                     <MoreHorizontal />
                   </MenuButton>
                   <MenuList  >
-                    <MenuItem>Visualizar</MenuItem>
-                    <MenuItem>Editar</MenuItem>
-                    <MenuItem>Excluir</MenuItem>
+                    <MenuItem>
+                      <Link to={`/visualize/${item.identificador}`}>
+                        Visualizar
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link to={`/edit/${item.identificador}`}>
+                        Editar
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      Excluir
+                    </MenuItem>
                   </MenuList>
                 </Menu>
               </Td>
