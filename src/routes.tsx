@@ -1,8 +1,9 @@
 import { Route, Routes as BrowserRoutes } from 'react-router-dom';
-import Home from './pages/Home';
+
 import Create from './pages/create';
 import Edit from './pages/edit';
 import Visualize from './pages/visualize';
+import Home from './pages/Home';
 
 
 const Routes = () => {

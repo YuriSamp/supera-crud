@@ -12,12 +12,12 @@ import {
   MenuList,
   MenuItem,
 } from '@chakra-ui/react'
-import { userData } from '../pages/Home'
 import { MoreHorizontal } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { userData } from '../lib/schema/form'
 
 export interface TableProps {
-  data: userData[]
+  data: readonly userData[]
 }
 
 const DataTable = ({ data }: TableProps) => {
@@ -36,7 +36,7 @@ const DataTable = ({ data }: TableProps) => {
         </Thead>
         <Tbody>
           {data.map(item => (
-            <Tr>
+            <Tr key={item.identificador}>
               <Td>{item.identificador}</Td>
               <Td>{item.nome}</Td>
               <Td >{item.email}</Td>

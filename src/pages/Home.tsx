@@ -1,60 +1,30 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { HStack } from '@chakra-ui/react'
 import DataTable from '../components/table'
-
-export interface userData {
-  identificador: string
-  nome: string
-  email: string
-  perfil: string
-  idade: number
-}
-
-const mockData = [
-  {
-    "identificador": "1",
-    "nome": "João",
-    "email": "joao@email.com",
-    "perfil": "Usuário",
-    "idade": 30
-  },
-  {
-    "identificador": "2",
-    "nome": "Maria",
-    "email": "maria@email.com",
-    "perfil": "Admin",
-    "idade": 35
-  },
-  {
-    "identificador": "3",
-    "nome": "Carlos",
-    "email": "carlos@email.com",
-    "perfil": "Usuário",
-    "idade": 25
-  },
-  {
-    "identificador": "4",
-    "nome": "Ana",
-    "email": "ana@email.com",
-    "perfil": "Moderador",
-    "idade": 28
-  },
-  {
-    "identificador": "5",
-    "nome": "Pedro",
-    "email": "pedro@email.com",
-    "perfil": "Usuário",
-    "idade": 22
-  }
-]
-
+import { userData } from '../lib/schema/form'
+import { useQuery } from '@tanstack/react-query'
+import { request } from '../lib/http'
 
 const Home = () => {
-  const [data,] = useState(mockData)
+  const [users, setUsers] = useState<userData[]>([])
+
+  const getusers = async () => {
+    const { data: users } = await request.get<userData[]>('http://localhost:3000/user')
+    return users
+  }
+
+  const { data, error } = useQuery({ queryKey: ['user'], queryFn: getusers })
+
+  useEffect(() => {
+    if (error || !data) {
+      return
+    }
+    setUsers(data)
+  }, [data, error])
 
   return (
     <HStack height='calc(100vh)' bg={'ghostwhite'} flexDir={'column'} justifyContent={'center'} placeItems={'initial'} paddingX={'96'}>
-      <DataTable data={data} />
+      <DataTable data={users} />
     </HStack>
   )
 }
