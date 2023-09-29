@@ -1,34 +1,61 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { HStack } from '@chakra-ui/react'
+import DataTable from './components/table'
+
+export interface userData {
+  identificador: string
+  nome: string
+  email: string
+  perfil: string
+  idade: number
+}
+
+const mockData = [
+  {
+    "identificador": "1",
+    "nome": "João",
+    "email": "joao@email.com",
+    "perfil": "Usuário",
+    "idade": 30
+  },
+  {
+    "identificador": "2",
+    "nome": "Maria",
+    "email": "maria@email.com",
+    "perfil": "Admin",
+    "idade": 35
+  },
+  {
+    "identificador": "3",
+    "nome": "Carlos",
+    "email": "carlos@email.com",
+    "perfil": "Usuário",
+    "idade": 25
+  },
+  {
+    "identificador": "4",
+    "nome": "Ana",
+    "email": "ana@email.com",
+    "perfil": "Moderador",
+    "idade": 28
+  },
+  {
+    "identificador": "5",
+    "nome": "Pedro",
+    "email": "pedro@email.com",
+    "perfil": "Usuário",
+    "idade": 22
+  }
+]
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [data,] = useState(mockData)
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <HStack height='calc(100vh)' bg={'ghostwhite'} flexDir={'column'} justifyContent={'center'} placeItems={'initial'} paddingX={'96'}>
+      <DataTable data={data} />
+    </HStack>
   )
 }
 
