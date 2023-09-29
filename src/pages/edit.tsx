@@ -1,20 +1,12 @@
 import { HStack, Heading, Input, Button, Select } from '@chakra-ui/react'
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useParams } from 'react-router-dom'
+import { formSchema } from '../lib/schema/form'
 import * as yup from 'yup'
-
-const formSchema = yup.object({
-  nome: yup.string().min(3, 'Mínimo de 3 caractéres permitidos').max(100, 'Máximo de 100 caractéres permitidos').required(),
-  email: yup.string().required().email(),
-  perfil: yup.mixed<'Usuário Comum' | 'Administrador'>().required(),
-  telefone: yup.string().optional(),
-  idade: yup.number().optional(),
-})
 
 const Edit = () => {
 
   const { id } = useParams()
-  console.log(id)
 
   const {
     register,
