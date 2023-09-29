@@ -8,8 +8,15 @@ import {
   Th,
   Td,
   TableContainer,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from '@chakra-ui/react'
+
+
 import { userData } from '../App'
+import { MoreHorizontal } from 'lucide-react'
 
 export interface TableProps {
   data: userData[]
@@ -37,7 +44,18 @@ const DataTable = ({ data }: TableProps) => {
               <Td >{item.email}</Td>
               <Td >{item.perfil}</Td>
               <Td >{item.idade}</Td>
-              <Td >Ações</Td>
+              <Td >
+                <Menu>
+                  <MenuButton  >
+                    <MoreHorizontal />
+                  </MenuButton>
+                  <MenuList  >
+                    <MenuItem>Visualizar</MenuItem>
+                    <MenuItem>Editar</MenuItem>
+                    <MenuItem>Excluir</MenuItem>
+                  </MenuList>
+                </Menu>
+              </Td>
             </Tr>
           ))}
         </Tbody>
