@@ -4,6 +4,7 @@ import DataTable from '../components/table'
 import { userData } from '../lib/schema/form'
 import { useQuery } from '@tanstack/react-query'
 import { request } from '../lib/http'
+import Navbar from '../components/navbar'
 
 const Home = () => {
   const [users, setUsers] = useState<userData[]>([])
@@ -23,7 +24,8 @@ const Home = () => {
   }, [data, error])
 
   return (
-    <HStack height='calc(100vh)' bg={'ghostwhite'} flexDir={'column'} justifyContent={'center'} placeItems={'initial'} paddingX={'96'}>
+    <HStack height='calc(100vh)' bg={'ghostwhite'} flexDir={'column'} placeItems={'initial'} gap={40} paddingX={'96'}>
+      <Navbar />
       <DataTable data={users} />
     </HStack>
   )

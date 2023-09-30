@@ -22,7 +22,7 @@ export interface TableProps {
 
 const DataTable = ({ data }: TableProps) => {
   return (
-    <TableContainer>
+    <TableContainer w={'full'}>
       <Table variant='simple'>
         <Thead>
           <Tr>
