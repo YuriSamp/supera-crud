@@ -13,4 +13,4 @@ export const formSchema = yup.object({
   idade: yup.number().optional(),
 });
 
-export type userData = yup.InferType<typeof formSchema>;
+export type user = yup.InferType<typeof formSchema>;
