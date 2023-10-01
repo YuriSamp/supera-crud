@@ -15,11 +15,11 @@ export const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ChakraProvider>
-        <BrowserRouter>
+      <BrowserRouter>
+        <ChakraProvider>
           <Routes />
-        </BrowserRouter>
-      </ChakraProvider>
+        </ChakraProvider>
+      </BrowserRouter>
     </QueryClientProvider>
   )
 }

@@ -4,17 +4,23 @@ import { useParams } from 'react-router-dom'
 import { formSchema } from '../lib/schema/form'
 import * as yup from 'yup'
 import { toast, ToastContainer } from 'react-toastify';
+import { useAtomValue } from 'jotai'
+import { userAtom } from '../lib/context'
 
 const Edit = () => {
 
+  const users = useAtomValue(userAtom)
   const { id } = useParams()
+
+  const user = users.filter(user => user.id === id)[0]
+  console.log(user, users)
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<yup.InferType<typeof formSchema>>()
-
+  } = useForm<yup.InferType<typeof formSchema>>({
+    defaultValues: user
+  })
 
   const onSubmit: SubmitHandler<yup.InferType<typeof formSchema>> = (data) => {
     console.log(data)

@@ -34,24 +34,6 @@
       "email": "pedro@email.com",
       "perfil": "Usuário Comum",
       "idade": 22
-    },
-    {
-      "userData": "6",
-      "idade": 1,
-      "telefone": "",
-      "perfil": "Administrador",
-      "email": "yurisamp123@gmail.com",
-      "nome": "aaaa",
-      "id": "6"
-    },
-    {
-      "userData": "7",
-      "idade": 33,
-      "telefone": "(21) 3371-1875",
-      "perfil": "Usuário Comum",
-      "email": "yurisamp123@gmail.com",
-      "nome": "Google",
-      "id": "7"
     }
   ]
 }

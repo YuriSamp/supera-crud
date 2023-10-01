@@ -13,12 +13,10 @@ const Create = () => {
     handleSubmit,
   } = useForm<yup.InferType<typeof formSchema>>()
 
-
-
   const onSubmit: SubmitHandler<yup.InferType<typeof formSchema>> = async (data) => {
     try {
       const userData = formSchema.validateSync(data)
-      const { status } = await request.post('/user', { userData: userData.id = '7', ...userData })
+      const { status } = await request.post('/user', { id: userData.id = '7', ...userData })
       if (status === 201) {
         toast.success('Deu tudo certo')
       }

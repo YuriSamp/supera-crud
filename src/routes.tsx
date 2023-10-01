@@ -3,10 +3,11 @@ import { Route, Routes as BrowserRoutes } from 'react-router-dom';
 import Create from './pages/create';
 import Edit from './pages/edit';
 import Visualize from './pages/visualize';
-import Home from './pages/Home';
+import Home from './pages/home';
 
 
 const Routes = () => {
+
   return (
     <BrowserRoutes >
       <Route
