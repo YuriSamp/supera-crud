@@ -5,8 +5,13 @@ import { formSchema } from '../lib/schema/form'
 import Navbar from '../components/navbar'
 import { toast, ToastContainer } from 'react-toastify';
 import { request } from '../lib/http'
+import { useAtomValue } from 'jotai'
+import { userAtom } from '../lib/context'
+
 
 const Create = () => {
+
+  const users = useAtomValue(userAtom)
 
   const {
     register,
@@ -16,7 +21,7 @@ const Create = () => {
   const onSubmit: SubmitHandler<yup.InferType<typeof formSchema>> = async (data) => {
     try {
       const userData = formSchema.validateSync(data)
-      const { status } = await request.post('/user', { id: userData.id = '7', ...userData })
+      const { status } = await request.post('/user', { id: userData.id = String(users.length), ...userData })
       if (status === 201) {
         toast.success('Deu tudo certo')
       }
