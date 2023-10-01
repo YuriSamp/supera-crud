@@ -4,19 +4,30 @@ import * as yup from 'yup'
 import { formSchema } from '../lib/schema/form'
 import Navbar from '../components/navbar'
 import { toast, ToastContainer } from 'react-toastify';
+import { request } from '../lib/http'
 
 const Create = () => {
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm<yup.InferType<typeof formSchema>>()
 
 
-  const onSubmit: SubmitHandler<yup.InferType<typeof formSchema>> = (data) => {
-    console.log(data)
-    toast.success('Teste')
+
+  const onSubmit: SubmitHandler<yup.InferType<typeof formSchema>> = async (data) => {
+    try {
+      const userData = formSchema.validateSync(data)
+      const { status } = await request.post('/user', { userData: userData.id = '7', ...userData })
+      if (status === 201) {
+        toast.success('Deu tudo certo')
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message)
+        return
+      }
+    }
   }
 
   return (

@@ -10,7 +10,7 @@ const Home = () => {
   const [users, setUsers] = useState<user[]>([])
 
   const getusers = async () => {
-    const { data: users } = await request.get<user[]>('http://localhost:3000/user')
+    const { data: users } = await request.get<user[]>('/user')
     return users
   }
 

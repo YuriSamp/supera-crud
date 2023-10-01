@@ -14,10 +14,10 @@ import {
 } from '@chakra-ui/react'
 import { MoreHorizontal } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { userData } from '../lib/schema/form'
+import { user } from '../lib/schema/form'
 
 export interface TableProps {
-  data: readonly userData[]
+  data: readonly user[]
 }
 
 const DataTable = ({ data }: TableProps) => {
@@ -26,7 +26,7 @@ const DataTable = ({ data }: TableProps) => {
       <Table variant='simple'>
         <Thead>
           <Tr>
-            <Th>Identificador</Th>
+            <Th>identificador</Th>
             <Th>Nome</Th>
             <Th>Email</Th>
             <Th >Perfil</Th>
@@ -36,8 +36,8 @@ const DataTable = ({ data }: TableProps) => {
         </Thead>
         <Tbody>
           {data.map(item => (
-            <Tr key={item.identificador}>
-              <Td>{item.identificador}</Td>
+            <Tr key={item.id}>
+              <Td>{item.id}</Td>
               <Td>{item.nome}</Td>
               <Td >{item.email}</Td>
               <Td >{item.perfil}</Td>
@@ -49,12 +49,12 @@ const DataTable = ({ data }: TableProps) => {
                   </MenuButton>
                   <MenuList  >
                     <MenuItem>
-                      <Link to={`/visualize/${item.identificador}`}>
+                      <Link to={`/visualize/${item.id}`}>
                         Visualizar
                       </Link>
                     </MenuItem>
                     <MenuItem>
-                      <Link to={`/edit/${item.identificador}`}>
+                      <Link to={`/edit/${item.id}`}>
                         Editar
                       </Link>
                     </MenuItem>
