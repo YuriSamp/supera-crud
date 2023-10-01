@@ -8,7 +8,6 @@ import { request } from '../lib/http'
 import { useAtomValue } from 'jotai'
 import { userAtom } from '../lib/context'
 
-
 const Create = () => {
 
   const users = useAtomValue(userAtom)

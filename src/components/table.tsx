@@ -15,12 +15,18 @@ import {
 import { MoreHorizontal } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { user } from '../lib/schema/form'
+import { useSetAtom } from 'jotai'
+import { deleteModalAtom, userId } from '../lib/context'
 
 export interface TableProps {
   data: readonly user[]
 }
 
 const DataTable = ({ data }: TableProps) => {
+
+  const setId = useSetAtom(userId)
+  const setIsOpen = useSetAtom(deleteModalAtom)
+
   return (
     <TableContainer w={'full'}>
       <Table variant='simple'>
@@ -58,7 +64,10 @@ const DataTable = ({ data }: TableProps) => {
                         Editar
                       </Link>
                     </MenuItem>
-                    <MenuItem>
+                    <MenuItem onClick={() => {
+                      setId(item.id || '0')
+                      setIsOpen(true)
+                    }}>
                       Excluir
                     </MenuItem>
                   </MenuList>
