@@ -28,7 +28,7 @@ const Home = () => {
   }, [userList, error, setUsers])
 
   return (
-    <HStack height='calc(100vh)' bg={'ghostwhite'} flexDir={'column'} placeItems={'initial'} gap={40} paddingX={{ lg: '24', xl: '80' }}>
+    <HStack height='calc(100vh)' bg={'ghostwhite'} flexDir={'column'} placeItems={'initial'} gap={40} paddingX={{ base: '24', xl: '48', '2xl': '80' }}>
       <Navbar />
       <DataTable
         data={users}

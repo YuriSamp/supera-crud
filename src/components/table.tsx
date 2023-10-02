@@ -12,6 +12,7 @@ import {
   MenuItem,
   HStack,
   Input,
+  Button,
 } from '@chakra-ui/react'
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
 import { Link } from 'react-router-dom'
@@ -43,12 +44,19 @@ const DataTable = ({ data, setPage, page }: TableProps) => {
 
   const numberOfPage = Math.ceil(dataDb.user.length / 5)
 
+  const cleanFilter = () => {
+    setNome('')
+    setPerfil('')
+    setEmail('')
+  }
+
   return (
-    <TableContainer w={'full'}>
-      <HStack>
-        <Input placeholder={'nome'} borderWidth={1} rounded={'lg'} borderColor={'black'} w={'96'} onChange={(e) => setNome(e.target.value)} />
-        <Input placeholder={'perfil'} borderWidth={1} rounded={'lg'} borderColor={'black'} w={'96'} onChange={(e) => setPerfil(e.target.value)} />
-        <Input placeholder={'email'} borderWidth={1} rounded={'lg'} borderColor={'black'} w={'96'} onChange={(e) => setEmail(e.target.value)} />
+    <TableContainer w={'full'} borderWidth={1} rounded={'md'} padding={4} borderColor={'black'}>
+      <HStack gap={3} paddingY={4}>
+        <Input placeholder={'Nome'} borderWidth={1} rounded={'lg'} borderColor={'black'} w={'40'} value={nome} onChange={(e) => setNome(e.target.value)} />
+        <Input placeholder={'Perfil'} borderWidth={1} rounded={'lg'} borderColor={'black'} w={'40'} value={perfil} onChange={(e) => setPerfil(e.target.value)} />
+        <Input placeholder={'Email'} borderWidth={1} rounded={'lg'} borderColor={'black'} w={'40'} value={email} onChange={(e) => setEmail(e.target.value)} />
+        <Button onClick={cleanFilter} bgColor={'purple.600'} color={'white'} _hover={{}}>Limpar</Button>
       </HStack>
       <Table variant='simple' w={'full'}>
         <Thead>
@@ -97,7 +105,7 @@ const DataTable = ({ data, setPage, page }: TableProps) => {
           ))}
         </Tbody>
       </Table>
-      <HStack paddingTop={3} width={'full'} justifyContent={'end'} paddingRight={10}  >
+      <HStack paddingY={4} width={'full'} justifyContent={'end'} paddingRight={10}  >
         <HStack>
           <span>Page {page} of {numberOfPage} </span>
         </HStack>
