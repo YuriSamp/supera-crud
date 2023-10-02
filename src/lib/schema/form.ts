@@ -13,7 +13,7 @@ export const formSchema = yup.object({
     .email('Pro favor insira um email válido'),
   perfil: yup.string().required('Perfil é um campo obrigatorio'),
   telefone: yup.string().optional(),
-  idade: yup.number().optional().typeError('Idade deve ser do tipo número'),
+  idade: yup.number().optional().typeError('Idade é um campo obrigatorio'),
 });
 
 export type user = yup.InferType<typeof formSchema>;

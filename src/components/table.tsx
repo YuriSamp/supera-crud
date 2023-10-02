@@ -37,7 +37,6 @@ const DataTable = ({ data }: TableProps) => {
             <Th>Email</Th>
             <Th >Perfil</Th>
             <Th >Idade</Th>
-            <Th>Ações</Th>
           </Tr>
         </Thead>
         <Tbody>

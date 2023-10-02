@@ -7,6 +7,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { request } from '../lib/http'
 import { useAtomValue } from 'jotai'
 import { userAtom } from '../lib/context'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 const Create = () => {
 
@@ -15,7 +16,10 @@ const Create = () => {
   const {
     register,
     handleSubmit,
-  } = useForm<yup.InferType<typeof formSchema>>()
+    formState: { errors }
+  } = useForm<yup.InferType<typeof formSchema>>({
+    resolver: yupResolver(formSchema)
+  })
 
   const onSubmit: SubmitHandler<yup.InferType<typeof formSchema>> = async (data) => {
     try {
@@ -43,14 +47,29 @@ const Create = () => {
           </Heading>
           <form onSubmit={handleSubmit(onSubmit)} >
             <VStack flexDir={'column'} justifyContent={'center'} placeItems={'center'} gap={'3'}>
-              <Input placeholder='Nome'  {...register('nome')} w={330} />
-              <Input placeholder='Email' {...register('email')} />
-              <Select placeholder='Selecione o perfil' {...register('perfil')} >
-                <option value='Administrador'>Administrador</option>
-                <option value='Usuário Comum'>Usuário Comum</option>
-              </Select>
-              <Input placeholder='Telefone' {...register('telefone')} />
-              <Input placeholder='Idade'  {...register('idade')} />
+              <VStack flexDir={'column'} gap={'2'} w={330}>
+                <Input placeholder='Nome'  {...register('nome')} />
+                <span>{errors.nome && errors.nome?.message}</span>
+              </VStack>
+              <VStack flexDir={'column'} gap={'2'} w={330}>
+                <Input placeholder='Email' {...register('email')} />
+                <span>{errors.email && errors.email?.message}</span>
+              </VStack>
+              <VStack flexDir={'column'} gap={'2'} w={330}>
+                <Select placeholder='Selecione o perfil' {...register('perfil')} >
+                  <option value='Administrador'>Administrador</option>
+                  <option value='Usuário Comum'>Usuário Comum</option>
+                </Select>
+                <span>{errors.perfil && errors.perfil.message}</span>
+              </VStack >
+              <VStack flexDir={'column'} gap={'2'} w={330}>
+                <Input placeholder='Telefone' {...register('telefone')} />
+                <span>{errors.telefone && errors.telefone.message}</span>
+              </VStack>
+              <VStack flexDir={'column'} gap={'2'} w={330}>
+                <Input placeholder='Idade'  {...register('idade')} />
+                <span>{errors.idade && errors.idade.message}</span>
+              </VStack>
               <Button type='submit' bgColor={'purple.600'} color={'white'} _hover={{}} w={'full'}>Adicionar usuário</Button>
             </VStack>
           </form>
