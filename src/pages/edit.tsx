@@ -10,6 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import Navbar from '../components/navbar'
 import { request } from '../lib/http'
 import InputMask from 'react-input-mask';
+import { redirect } from "react-router-dom";
 
 const Edit = () => {
 
@@ -32,6 +33,9 @@ const Edit = () => {
       const { status } = await request.put(`/user/${id}`, userData)
       if (status === 204) {
         toast.success('Deu tudo certo')
+        setTimeout(() => {
+          redirect('/')
+        }, 1500)
       }
     } catch (error) {
       if (error instanceof Error) {

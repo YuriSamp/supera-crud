@@ -5,14 +5,14 @@ import { formSchema } from '../lib/schema/form'
 import Navbar from '../components/navbar'
 import { toast } from 'react-toastify';
 import { request } from '../lib/http'
-import { useAtomValue } from 'jotai'
-import { userAtom } from '../lib/context'
 import { yupResolver } from '@hookform/resolvers/yup'
 import InputMask from 'react-input-mask';
+import { useNavigate } from "react-router-dom";
+import dataDb from '../data/db.json'
 
 const Create = () => {
 
-  const users = useAtomValue(userAtom)
+  const navigate = useNavigate()
 
   const {
     register,
@@ -22,12 +22,27 @@ const Create = () => {
     resolver: yupResolver(formSchema)
   })
 
+
+
   const onSubmit: SubmitHandler<yup.InferType<typeof formSchema>> = async (data) => {
     try {
-      const userData = formSchema.validateSync(data)
-      const { status } = await request.post('/user', { id: userData.id = String(users.length - 1), ...userData })
+      const { email, nome, perfil, idade, telefone } = formSchema.validateSync(data)
+
+      const personObj = {
+        id: dataDb.user.length,
+        email,
+        nome,
+        perfil,
+        idade,
+        telefone
+      }
+
+      const { status } = await request.post('/user', personObj)
       if (status === 201) {
-        toast.success('Deu tudo certo')
+        toast.success('Usuario adicionado com sucesso')
+        setTimeout(() => {
+          navigate('/')
+        }, 1000)
       }
     } catch (error) {
       if (error instanceof Error) {
