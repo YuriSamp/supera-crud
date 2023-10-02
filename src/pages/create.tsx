@@ -29,7 +29,7 @@ const Create = () => {
       const { email, nome, perfil, idade, telefone } = formSchema.validateSync(data)
 
       const personObj = {
-        id: dataDb.user.length,
+        id: String(dataDb.user.length),
         email,
         nome,
         perfil,

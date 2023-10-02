@@ -10,9 +10,11 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import Navbar from '../components/navbar'
 import { request } from '../lib/http'
 import InputMask from 'react-input-mask';
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Edit = () => {
+
+  const navigate = useNavigate()
 
   const users = useAtomValue(userAtom)
   const { id } = useParams()
@@ -31,11 +33,11 @@ const Edit = () => {
     try {
       const userData = formSchema.validateSync(data)
       const { status } = await request.put(`/user/${id}`, userData)
-      if (status === 204) {
-        toast.success('Deu tudo certo')
+      if (status === 200) {
+        toast.success('Usuario editado com sucesso')
         setTimeout(() => {
-          redirect('/')
-        }, 1500)
+          navigate('/')
+        }, 1000)
       }
     } catch (error) {
       if (error instanceof Error) {

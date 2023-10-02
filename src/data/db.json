@@ -109,20 +109,12 @@
       "idade": 23
     },
     {
-      "id": 15,
+      "id": "15",
       "email": "yurisamp123@gmail.com",
-      "nome": "Google",
+      "nome": "Miguel",
       "perfil": "Administrador",
       "idade": 33,
       "telefone": "(11) 11111-1111"
-    },
-    {
-      "id": 16,
-      "email": "yurisamp123@gmail.com",
-      "nome": "Google",
-      "perfil": "Administrador",
-      "idade": 33,
-      "telefone": "(99) 99999-9999"
     }
   ]
 }
