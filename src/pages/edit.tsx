@@ -9,6 +9,7 @@ import { userAtom } from '../lib/context'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Navbar from '../components/navbar'
 import { request } from '../lib/http'
+import InputMask from 'react-input-mask';
 
 const Edit = () => {
 
@@ -65,7 +66,7 @@ const Edit = () => {
               <span style={{ color: 'red' }}>{errors.perfil && errors.perfil.message}</span>
             </VStack >
             <VStack flexDir={'column'} gap={'2'} w={330}>
-              <Input placeholder='Telefone' {...register('telefone')} />
+              <Input as={InputMask} mask={'(99) 99999-9999'} placeholder='Telefone' type='tel' {...register('telefone')} />
               <span style={{ color: 'red' }}>{errors.telefone && errors.telefone.message}</span>
             </VStack>
             <VStack flexDir={'column'} gap={'2'} w={330}>

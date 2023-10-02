@@ -8,6 +8,7 @@ import { request } from '../lib/http'
 import { useAtomValue } from 'jotai'
 import { userAtom } from '../lib/context'
 import { yupResolver } from '@hookform/resolvers/yup'
+import InputMask from 'react-input-mask';
 
 const Create = () => {
 
@@ -50,7 +51,7 @@ const Create = () => {
               <span style={{ color: 'red' }}>{errors.nome && errors.nome?.message}</span>
             </VStack>
             <VStack flexDir={'column'} gap={'2'} w={330}>
-              <Input placeholder='Email' {...register('email')} />
+              <Input placeholder='Email' type='email' {...register('email')} />
               <span style={{ color: 'red' }}>{errors.email && errors.email?.message}</span>
             </VStack>
             <VStack flexDir={'column'} gap={'2'} w={330}>
@@ -61,7 +62,7 @@ const Create = () => {
               <span style={{ color: 'red' }}>{errors.perfil && errors.perfil.message}</span>
             </VStack >
             <VStack flexDir={'column'} gap={'2'} w={330}>
-              <Input placeholder='Telefone' {...register('telefone')} />
+              <Input as={InputMask} mask={'(99) 99999-9999'} placeholder='Telefone' type='tel' {...register('telefone')} />
               <span style={{ color: 'red' }}>{errors.telefone && errors.telefone.message}</span>
             </VStack>
             <VStack flexDir={'column'} gap={'2'} w={330}>
