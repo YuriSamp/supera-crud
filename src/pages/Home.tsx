@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { HStack } from '@chakra-ui/react'
 import DataTable from '../components/table'
 import { user } from '../lib/schema/form'
@@ -11,13 +11,14 @@ import DeleteDialog from '../components/alert-dialog'
 
 const Home = () => {
   const [users, setUsers] = useAtom(userAtom)
+  const [page, setPage] = useState(1)
 
   const getusers = async () => {
-    const { data: users } = await request.get<user[]>('/user')
+    const { data: users } = await request.get<user[]>(`/user?_page=${page}&_limit=5`)
     return users
   }
 
-  const { data: userList, error } = useQuery({ queryKey: ['user'], queryFn: getusers })
+  const { data: userList, error } = useQuery({ queryKey: ['user', page], queryFn: getusers })
 
   useEffect(() => {
     if (error || !userList) {
@@ -29,7 +30,11 @@ const Home = () => {
   return (
     <HStack height='calc(100vh)' bg={'ghostwhite'} flexDir={'column'} placeItems={'initial'} gap={40} paddingX={'96'}>
       <Navbar />
-      <DataTable data={users} />
+      <DataTable
+        data={users}
+        page={page}
+        setPage={setPage}
+      />
       <DeleteDialog />
     </HStack>
   )
