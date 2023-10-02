@@ -11,12 +11,15 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  HStack,
+  Input,
 } from '@chakra-ui/react'
 import { MoreHorizontal } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { user } from '../lib/schema/form'
 import { useSetAtom } from 'jotai'
 import { deleteModalAtom, userId } from '../lib/context'
+import { useState } from 'react'
 
 export interface TableProps {
   data: readonly user[]
@@ -27,8 +30,23 @@ const DataTable = ({ data }: TableProps) => {
   const setId = useSetAtom(userId)
   const setIsOpen = useSetAtom(deleteModalAtom)
 
+  const [nome, setNome] = useState('')
+  const [perfil, setPerfil] = useState('')
+  const [email, setEmail] = useState('')
+
+
+  const filteredData = data.filter(entry =>
+    entry.nome.toLowerCase().includes(nome.toLowerCase())
+    && entry.perfil.toLowerCase().includes(perfil.toLowerCase())
+    && entry.email.toLowerCase().includes(email.toLowerCase()))
+
   return (
     <TableContainer w={'full'}>
+      <HStack>
+        <Input placeholder={'nome'} borderWidth={1} rounded={'lg'} borderColor={'black'} w={'96'} onChange={(e) => setNome(e.target.value)} />
+        <Input placeholder={'perfil'} borderWidth={1} rounded={'lg'} borderColor={'black'} w={'96'} onChange={(e) => setPerfil(e.target.value)} />
+        <Input placeholder={'email'} borderWidth={1} rounded={'lg'} borderColor={'black'} w={'96'} onChange={(e) => setEmail(e.target.value)} />
+      </HStack>
       <Table variant='simple'>
         <Thead>
           <Tr>
@@ -40,7 +58,7 @@ const DataTable = ({ data }: TableProps) => {
           </Tr>
         </Thead>
         <Tbody>
-          {data.map(item => (
+          {filteredData.map(item => (
             <Tr key={item.id}>
               <Td>{item.id}</Td>
               <Td>{item.nome}</Td>
