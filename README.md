@@ -33,3 +33,9 @@ pnpm dev
 ```bash
 json-server --watch src/data/db.json
 ```
+
+5. Para rodar os testes
+
+```bash
+pnpm test
+```
