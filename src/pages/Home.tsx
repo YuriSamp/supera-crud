@@ -8,7 +8,6 @@ import Navbar from '../components/navbar'
 import { useAtom } from 'jotai'
 import { userAtom } from '../lib/context'
 import DeleteDialog from '../components/alert-dialog'
-import { ToastContainer } from 'react-toastify'
 
 const Home = () => {
   const [users, setUsers] = useAtom(userAtom)
@@ -28,14 +27,11 @@ const Home = () => {
   }, [userList, error, setUsers])
 
   return (
-    <>
-      <ToastContainer />
-      <HStack height='calc(100vh)' bg={'ghostwhite'} flexDir={'column'} placeItems={'initial'} gap={40} paddingX={'96'}>
-        <Navbar />
-        <DataTable data={users} />
-        <DeleteDialog />
-      </HStack>
-    </>
+    <HStack height='calc(100vh)' bg={'ghostwhite'} flexDir={'column'} placeItems={'initial'} gap={40} paddingX={'96'}>
+      <Navbar />
+      <DataTable data={users} />
+      <DeleteDialog />
+    </HStack>
   )
 }
 

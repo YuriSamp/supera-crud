@@ -8,6 +8,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from 'react-toastify';
 
 export const App = () => {
 
@@ -17,6 +18,7 @@ export const App = () => {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <ChakraProvider>
+          <ToastContainer />
           <Routes />
         </ChakraProvider>
       </BrowserRouter>
