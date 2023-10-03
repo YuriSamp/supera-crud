@@ -63,26 +63,26 @@ const Create = () => {
           <VStack flexDir={'column'} justifyContent={'center'} placeItems={'center'} gap={'3'}>
             <VStack flexDir={'column'} gap={'2'} w={330}>
               <Input placeholder='Nome'  {...register('nome')} />
-              <span style={{ color: 'red' }}>{errors.nome && errors.nome?.message}</span>
+              <span style={{ color: 'red' }}>{errors.nome?.message}</span>
             </VStack>
             <VStack flexDir={'column'} gap={'2'} w={330}>
               <Input placeholder='Email' type='email' {...register('email')} />
-              <span style={{ color: 'red' }}>{errors.email && errors.email?.message}</span>
+              <span style={{ color: 'red' }}>{errors.email?.message}</span>
             </VStack>
             <VStack flexDir={'column'} gap={'2'} w={330}>
               <Select placeholder='Selecione o perfil' {...register('perfil')} >
                 <option value='Administrador'>Administrador</option>
                 <option value='Usuário Comum'>Usuário Comum</option>
               </Select>
-              <span style={{ color: 'red' }}>{errors.perfil && errors.perfil.message}</span>
+              <span style={{ color: 'red' }}>{errors.perfil?.message}</span>
             </VStack >
             <VStack flexDir={'column'} gap={'2'} w={330}>
               <Input as={InputMask} mask={'(99) 99999-9999'} placeholder='Telefone' type='tel' {...register('telefone')} />
-              <span style={{ color: 'red' }}>{errors.telefone && errors.telefone.message}</span>
+              <span style={{ color: 'red' }}>{errors.telefone?.message}</span>
             </VStack>
             <VStack flexDir={'column'} gap={'2'} w={330}>
               <Input placeholder='Idade'  {...register('idade')} />
-              <span style={{ color: 'red' }}>{errors.idade && errors.idade.message}</span>
+              <span style={{ color: 'red' }}>{errors.idade?.message}</span>
             </VStack>
             <Button type='submit' bgColor={'purple.600'} color={'white'} _hover={{}} w={'full'}>Adicionar usuário</Button>
           </VStack>
