@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const request = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: process.env.BASE_URL,
 });
 
 export { request };

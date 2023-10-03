@@ -1,17 +1,29 @@
 ## Sobre o projeto
 
-Pequeno teste da empresa para testar a organização do meu código e meu dominio sobre as blibiotecas impostas para o teste
+Pequeno teste da empresa para testar a organização do meu código e meu dominio sobre as bibliotecas impostas para o teste
 
 ## Preview do layout
 
 ![layout](./public//preview.png)
+
+## Stack utilizada
+
+- @tanstack/react-query
+- react-input-mask
+- react-router-dom
+- react-toastify
+- lucide-react
+- json-server
+- axios
+- react
+- yup
 
 ## Rodando localmente
 
 1. clone o repositorio localmente na sua maquina.
 
 ```bash
-git clone https://github.com/YuriSamp/readme-translator
+git clone https://github.com/YuriSamp/supera-crud
 ```
 
 2. Instalando as dependencias.
@@ -20,7 +32,7 @@ git clone https://github.com/YuriSamp/readme-translator
 pnpm install
 ```
 
-Para rodar o projeto, abra 2 terminais, um pra rodar o front e outro para rodar a fake api
+Para rodar o projeto, abra 2 terminais, um para rodar o front e outro para rodar a fake api
 
 3. Front
 
