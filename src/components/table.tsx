@@ -21,9 +21,7 @@ import { deleteModalAtom, userId } from '../lib/context'
 import { Dispatch, SetStateAction, useState } from 'react'
 import dataDb from '../data/db.json'
 import { user } from '../types/user'
-
-
-const ROW_COUNT = 5
+import { ROW_COUNT } from '../config/constants'
 
 export interface TableProps {
   data: readonly user[]
