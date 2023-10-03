@@ -44,11 +44,11 @@ const DeleteDialog = () => {
       <AlertDialogOverlay>
         <AlertDialogContent>
           <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-            Deletar {user && user.nome}
+            Deletar {user?.nome}
           </AlertDialogHeader>
 
           <AlertDialogBody>
-            Tem certeza? essa ação não poderá ser desfeita.
+            Tem certeza? Essa ação não poderá ser desfeita.
           </AlertDialogBody>
 
           <AlertDialogFooter>

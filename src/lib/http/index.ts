@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const request = axios.create({
-  baseURL: process.env.BASE_URL,
+  baseURL: import.meta.env.VITE_DB_URL,
 });
 
 export { request };

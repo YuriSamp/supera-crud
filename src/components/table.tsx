@@ -107,7 +107,7 @@ const DataTable = ({ data, setPage, page }: TableProps) => {
       </Table>
       <HStack paddingY={4} width={'full'} justifyContent={'end'} paddingRight={10}  >
         <HStack>
-          <span>Page {page} of {numberOfPage} </span>
+          <span>Pagina {page} de {numberOfPage} </span>
         </HStack>
         <HStack>
           <ChevronLeft style={{ cursor: 'pointer' }} onClick={() => setPage(old => Math.max(old - 1, 1))} />
