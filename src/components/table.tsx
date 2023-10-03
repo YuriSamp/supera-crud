@@ -16,11 +16,14 @@ import {
 } from '@chakra-ui/react'
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { user } from '../lib/schema/form'
 import { useSetAtom } from 'jotai'
 import { deleteModalAtom, userId } from '../lib/context'
 import { Dispatch, SetStateAction, useState } from 'react'
 import dataDb from '../data/db.json'
+import { user } from '../types/user'
+
+
+const ROW_COUNT = 5
 
 export interface TableProps {
   data: readonly user[]
@@ -42,7 +45,7 @@ const DataTable = ({ data, setPage, page }: TableProps) => {
     && entry.perfil.toLowerCase().includes(perfil.toLowerCase())
     && entry.email.toLowerCase().includes(email.toLowerCase()))
 
-  const numberOfPage = Math.ceil(dataDb.user.length / 5)
+  const numberOfPage = Math.ceil(dataDb.user.length / ROW_COUNT)
 
   const cleanFilter = () => {
     setNome('')

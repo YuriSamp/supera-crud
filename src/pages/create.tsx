@@ -1,7 +1,6 @@
 import { Heading, Input, Button, Select, VStack } from '@chakra-ui/react'
 import { SubmitHandler, useForm } from "react-hook-form"
 import * as yup from 'yup'
-import { formSchema } from '../lib/schema/form'
 import Navbar from '../components/navbar'
 import { toast } from 'react-toastify';
 import { request } from '../lib/http'
@@ -9,6 +8,24 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import InputMask from 'react-input-mask';
 import { useNavigate } from "react-router-dom";
 import dataDb from '../data/db.json'
+
+export const formSchema = yup.object({
+  id: yup.string().optional(),
+  nome: yup
+    .string()
+    .required('Nome é um campo obrigatorio')
+    .min(3, 'Mínimo de 3 caractéres permitidos')
+    .max(100, 'Máximo de 100 caractéres permitidos'),
+  email: yup
+    .string()
+    .required('Email é um campo obrigatorio')
+    .email('Pro favor insira um email válido'),
+  perfil: yup.string().required('Perfil é um campo obrigatorio'),
+  telefone: yup.string().optional(),
+  idade: yup.number().optional().typeError('Idade deve ser do tipo numerico'),
+});
+
+
 
 const Create = () => {
 
