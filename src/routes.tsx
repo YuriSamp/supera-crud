@@ -3,13 +3,14 @@ import { Route, Routes as BrowserRoutes } from 'react-router-dom';
 import Create from './pages/create';
 import Edit from './pages/edit';
 import Visualize from './pages/visualize';
-import Home from './pages/home';
+import { ROUTES } from './config/routes';
+import Home from './pages/Home';
 
 const RoutesList = [
-  { path: '/', element: <Home /> },
-  { path: '/create', element: <Create /> },
-  { path: '/edit/:id', element: <Edit /> },
-  { path: '/visualize/:id', element: <Visualize /> }
+  { path: ROUTES.HOME, element: <Home /> },
+  { path: ROUTES.CREATE, element: <Create /> },
+  { path: ROUTES.EDIT, element: <Edit /> },
+  { path: ROUTES.VISUALIZE, element: <Visualize /> }
 ]
 
 const Routes = () => {
