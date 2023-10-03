@@ -5,35 +5,23 @@ import Edit from './pages/edit';
 import Visualize from './pages/visualize';
 import Home from './pages/home';
 
+const RoutesList = [
+  { path: '/', element: <Home /> },
+  { path: '/create', element: <Create /> },
+  { path: '/edit/:id', element: <Edit /> },
+  { path: '/visualize/:id', element: <Visualize /> }
+]
 
 const Routes = () => {
-
   return (
     <BrowserRoutes >
-      <Route
-        path='/'
-        element={
-          <Home />
-        }
-      />
-      <Route
-        path='/create'
-        element={
-          <Create />
-        }
-      />
-      <Route
-        path='/edit/:id'
-        element={
-          <Edit />
-        }
-      />
-      <Route
-        path='/visualize/:id'
-        element={
-          <Visualize />
-        }
-      />
+      {RoutesList.map(route => (
+        <Route
+          key={route.path}
+          path={route.path}
+          element={route.element}
+        />
+      ))}
     </BrowserRoutes>
   );
 };
