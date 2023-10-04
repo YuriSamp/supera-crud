@@ -103,15 +103,17 @@ const DataTable = ({ data, setPage, page, onOpen, setId }: TableProps) => {
           ))}
         </Tbody>
       </Table>
-      <HStack sx={styles.tableFooterContainer}  >
-        <HStack>
-          <span>Pagina {page} de {numberOfPage} </span>
+      {data.length > 5 &&
+        <HStack sx={styles.tableFooterContainer}  >
+          <HStack>
+            <span>Pagina {page} de {numberOfPage} </span>
+          </HStack>
+          <HStack>
+            <ChevronLeft style={{ cursor: 'pointer' }} onClick={() => setPage(old => Math.max(old - 1, 1))} />
+            <ChevronRight style={{ cursor: 'pointer' }} onClick={() => page < numberOfPage && setPage(old => old + 1)} />
+          </HStack>
         </HStack>
-        <HStack>
-          <ChevronLeft style={{ cursor: 'pointer' }} onClick={() => setPage(old => Math.max(old - 1, 1))} />
-          <ChevronRight style={{ cursor: 'pointer' }} onClick={() => page < numberOfPage && setPage(old => old + 1)} />
-        </HStack>
-      </HStack>
+      }
     </TableContainer>
   )
 }

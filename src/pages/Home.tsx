@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { SystemStyleObject, VStack, Spinner } from '@chakra-ui/react'
 import DataTable from '../components/table'
 import { useQuery } from '@tanstack/react-query'
@@ -28,26 +28,22 @@ const Home = () => {
   const [id, setId] = useState('')
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-
   const getusers = async () => {
     const { data: users } = await request.get<user[]>(`/user?_page=${page}&_limit=5`)
     return users
   }
 
-  const { data: userList, error, isLoading, refetch } = useQuery({
+  const { isLoading, refetch } = useQuery({
     queryKey: ['users', page],
     queryFn: getusers,
     onError: () => {
       toast.error('Ocorreu um erro ao fazer a requisição para o banco de dados')
+    },
+    onSuccess: (userList: user[]) => {
+      setUsers(userList)
     }
   })
 
-  useEffect(() => {
-    if (error || !userList) {
-      return
-    }
-    setUsers(userList)
-  }, [userList, error, setUsers])
 
   const user = users.filter(user => user.id === id)[0]
 
@@ -55,7 +51,7 @@ const Home = () => {
     <VStack sx={styles.container}>
       <Navbar />
       <VStack gap={isLoading ? 20 : 0}>
-        <Filters />
+        <Filters setUsers={setUsers} refetch={refetch} />
         {isLoading ? < Spinner /> :
           <DataTable
             data={users}

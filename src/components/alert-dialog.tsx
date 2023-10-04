@@ -55,7 +55,7 @@ const DeleteDialog = ({ isOpen, onClose, id, user, refetch }: Props) => {
       onClose()
     },
     onError: () => {
-      toast.error('Algo deu errado tente novamente')
+      toast.error('Algo deu errado, tente novamente')
     }
   },)
 

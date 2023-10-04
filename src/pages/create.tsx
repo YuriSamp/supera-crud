@@ -75,7 +75,7 @@ const Create = () => {
       }, 1000)
     },
     onError: () => {
-      toast.error('Algo deu errado tente novamente')
+      toast.error('Algo deu errado,tente novamente')
     }
   },)
 
