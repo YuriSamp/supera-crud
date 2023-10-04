@@ -1,5 +1,5 @@
 import { Button, HStack, Input, SystemStyleObject } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 const styles: Record<string, SystemStyleObject> = {
   container: {
@@ -14,26 +14,30 @@ const styles: Record<string, SystemStyleObject> = {
   }
 }
 
+type FilterTypes = {
+  name: string
+  userType: string
+  email: string
+}
 
 const Filters = () => {
 
-  const [nome, setNome] = useState('')
-  const [perfil, setPerfil] = useState('')
-  const [email, setEmail] = useState('')
+  const {
+    register,
+    handleSubmit,
+  } = useForm<FilterTypes>()
 
-  const cleanFilter = () => {
-    setNome('')
-    setPerfil('')
-    setEmail('')
+  const onSubmit = (data: FilterTypes) => {
+    console.log(data)
   }
 
 
   return (
     <HStack sx={styles.container}>
-      <Input placeholder={'Nome'} sx={styles.input} value={nome} onChange={(e) => setNome(e.target.value)} />
-      <Input placeholder={'Perfil'} sx={styles.input} value={perfil} onChange={(e) => setPerfil(e.target.value)} />
-      <Input placeholder={'Email'} sx={styles.input} value={email} onChange={(e) => setEmail(e.target.value)} />
-      <Button onClick={cleanFilter} bgColor={'purple.600'} color={'white'} _hover={{}}>Limpar</Button>
+      <Input placeholder={'Nome'} sx={styles.input}  {...register('name')} />
+      <Input placeholder={'Perfil'} sx={styles.input} {...register('userType')} />
+      <Input placeholder={'Email'} sx={styles.input} {...register('email')} />
+      <Button onClick={handleSubmit(onSubmit)} bgColor={'green.600'} color={'white'} _hover={{}}>Pesquisar</Button>
     </HStack>
   )
 }
