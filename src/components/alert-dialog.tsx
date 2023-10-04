@@ -14,21 +14,20 @@ import { toast } from 'react-toastify';
 import { user } from '../types/user'
 
 interface Props {
-  userCredentials: readonly user[]
+  user: user
   onClose: () => void
   isOpen: boolean
   id: string
 }
 
-const DeleteDialog = ({ isOpen, onClose, id, userCredentials }: Props) => {
-
-  const user = userCredentials.filter(user => user.id === id)[0]
+const DeleteDialog = ({ isOpen, onClose, id, user }: Props) => {
 
   const cancelRef = useRef(null)
 
   const onDelete = () => {
     request.delete(`/user/${id}`)
     toast.success('O usuário foi deletado com sucesso')
+    onClose()
   }
 
   return (

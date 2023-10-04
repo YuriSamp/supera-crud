@@ -45,6 +45,7 @@ const DataTable = ({ data, setPage, page, onOpen, isOpen, onClose }: TableProps)
     && entry.email.toLowerCase().includes(email.toLowerCase()))
 
   const numberOfPage = Math.ceil(dataDb.user.length / ROW_COUNT)
+  const user = data.filter(user => user.id === id)[0]
 
   const cleanFilter = () => {
     setNome('')
@@ -119,7 +120,7 @@ const DataTable = ({ data, setPage, page, onOpen, isOpen, onClose }: TableProps)
         </HStack>
       </TableContainer>
       <DeleteDialog
-        userCredentials={data}
+        user={user}
         isOpen={isOpen}
         onClose={onClose}
         id={id}
