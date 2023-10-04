@@ -1,4 +1,4 @@
-import { Button, Heading, Input, Select, VStack } from '@chakra-ui/react'
+import { Button, Heading, Input, Select, SystemStyleObject, VStack } from '@chakra-ui/react'
 import { FieldErrors, SubmitErrorHandler, SubmitHandler, UseFormRegister } from 'react-hook-form';
 import InputMask from 'react-input-mask';
 import { BaseSyntheticEvent, FormEventHandler } from 'react';
@@ -33,34 +33,64 @@ type RegisterType = | {
   onSubmit: SubmitType
 }
 
+
+const styles: Record<string, SystemStyleObject> = {
+  container: {
+    flexDir: 'column',
+    gap: 4,
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: 6,
+    rounded: 'md'
+  },
+  heading: {
+    fontSize: 26
+  },
+  inputContainer: {
+    flexDir: 'column',
+    gap: 2,
+    width: 330
+  },
+  formContainer: {
+    flexDir: 'column',
+    justifyContent: 'center',
+    placeItems: 'center',
+    gap: '3'
+  }
+}
+
+
 const FormBody = (props: RegisterType) => {
 
   if (props.type !== 'visualize') {
     return (
-      // Não tem problema esse 'as' aqui porque no nosso type a gente força que seja Submit com os FormFields, qualquer coisa fala que eu penso numa tipagem mais elaborada
-      <VStack flexDir={'column'} gap={4} borderWidth={1} borderColor={'black'} padding={6} rounded={'md'} >
+      <VStack sx={styles.container} >
+        <Heading sx={styles.heading}>
+          {props.title}
+        </Heading>
+        {/* Não tem problema esse 'as' aqui porque no nosso type a gente força que seja Submit com os FormFields, qualquer coisa fala que eu penso numa tipagem mais elaborada */}
         <form onSubmit={props.onSubmit as unknown as FormEventHandler<HTMLFormElement>} >
-          <VStack flexDir={'column'} justifyContent={'center'} placeItems={'center'} gap={'3'}>
-            <VStack flexDir={'column'} gap={'2'} w={330}>
-              <Input placeholder='Nome'  {...props.register('nome')} />
+          <VStack sx={styles.formContainer}>
+            <VStack sx={styles.inputContainer}>
+              <Input placeholder='Nome' {...props.register('nome')} />
               <span style={{ color: 'red' }}>{props.errors?.nome?.message}</span>
             </VStack>
-            <VStack flexDir={'column'} gap={'2'} w={330}>
+            <VStack sx={styles.inputContainer}>
               <Input placeholder='Email' type='email' {...props.register('email')} />
               <span style={{ color: 'red' }}>{props.errors?.email?.message}</span>
             </VStack>
-            <VStack flexDir={'column'} gap={'2'} w={330}>
+            <VStack sx={styles.inputContainer}>
               <Select placeholder='Selecione o perfil' {...props.register('perfil')} >
                 <option value='Administrador'>Administrador</option>
                 <option value='Usuário Comum'>Usuário Comum</option>
               </Select>
               <span style={{ color: 'red' }}>{props.errors?.perfil?.message}</span>
             </VStack >
-            <VStack flexDir={'column'} gap={'2'} w={330}>
+            <VStack sx={styles.inputContainer}>
               <Input as={InputMask} mask={'(99) 99999-9999'} placeholder='Telefone' type='tel' {...props.register('telefone')} />
               <span style={{ color: 'red' }}>{props.errors?.telefone?.message}</span>
             </VStack>
-            <VStack flexDir={'column'} gap={'2'} w={330}>
+            <VStack sx={styles.inputContainer}>
               <Input placeholder='Idade' type='number'  {...props.register('idade')} />
               <span style={{ color: 'red' }}>{props.errors?.idade?.message}</span>
             </VStack>
@@ -72,28 +102,28 @@ const FormBody = (props: RegisterType) => {
   }
 
   return (
-    <VStack flexDir={'column'} gap={4} borderWidth={1} borderColor={'black'} padding={6} rounded={'md'} >
-      <Heading fontSize={26}>
+    <VStack sx={styles.container} >
+      <Heading sx={styles.heading}>
         {props.title}
       </Heading>
-      <VStack flexDir={'column'} justifyContent={'center'} placeItems={'center'} gap={'3'}>
-        <VStack flexDir={'column'} gap={'2'} w={330}>
-          <Input placeholder='Nome' value={props.defaultValues?.nome} isDisabled />
+      <VStack sx={styles.formContainer}>
+        <VStack sx={styles.inputContainer}>
+          <Input value={props.defaultValues?.nome} isDisabled />
         </VStack>
-        <VStack flexDir={'column'} gap={'2'} w={330}>
+        <VStack sx={styles.inputContainer}>
           <Input placeholder='Email' type='email' value={props.defaultValues?.email} isDisabled />
         </VStack>
-        <VStack flexDir={'column'} gap={'2'} w={330}>
-          <Select placeholder='Selecione o perfil' value={props.defaultValues?.perfil} isDisabled>
+        <VStack sx={styles.inputContainer}>
+          <Select value={props.defaultValues?.perfil} isDisabled>
             <option value='Administrador'>Administrador</option>
             <option value='Usuário Comum'>Usuário Comum</option>
           </Select>
         </VStack >
-        <VStack flexDir={'column'} gap={'2'} w={330}>
-          <Input as={InputMask} mask={'(99) 99999-9999'} placeholder='Telefone' type='tel' value={props.defaultValues?.telefone} isDisabled />
+        <VStack sx={styles.inputContainer}>
+          <Input as={InputMask} mask={'(99) 99999-9999'} type='tel' value={props.defaultValues?.telefone || '00 00000 0000'} isDisabled />
         </VStack>
-        <VStack flexDir={'column'} gap={'2'} w={330}>
-          <Input placeholder='Idade' type='number' value={props.defaultValues?.idade} isDisabled />
+        <VStack sx={styles.inputContainer}>
+          <Input type='number' value={props.defaultValues?.idade || 'Não informado'} isDisabled />
         </VStack>
         <Button type='submit' bgColor={'purple.600'} color={'white'} _hover={{}} w={'full'} isDisabled>Adicionar usuário</Button>
       </VStack>

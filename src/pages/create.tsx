@@ -1,4 +1,4 @@
-import { VStack } from '@chakra-ui/react'
+import { SystemStyleObject, VStack } from '@chakra-ui/react'
 import { useForm } from "react-hook-form"
 import * as yup from 'yup'
 import Navbar from '../components/navbar'
@@ -27,6 +27,17 @@ export const formSchema = yup.object({
 });
 
 export type FormType = yup.InferType<typeof formSchema>
+
+const styles: Record<string, SystemStyleObject> = {
+  container: {
+    height: 'calc(100vh)',
+    bg: 'ghostwhite',
+    flexDir: 'column',
+    placeItems: 'center',
+    gap: '40',
+    paddingX: { lg: '24', xl: '80' }
+  }
+}
 
 const Create = () => {
 
@@ -66,7 +77,7 @@ const Create = () => {
   }
 
   return (
-    <VStack height='calc(100vh)' bg={'ghostwhite'} flexDir={'column'} placeItems={'center'} gap={40} paddingX={{ lg: '24', xl: '80' }}>
+    <VStack sx={styles.container}>
       <Navbar />
       <FormBody
         title='Criar novo usuário'

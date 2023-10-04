@@ -13,6 +13,7 @@ import {
   HStack,
   Input,
   Button,
+  SystemStyleObject,
 } from '@chakra-ui/react'
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
 import { Link } from 'react-router-dom'
@@ -29,6 +30,32 @@ export interface TableProps {
   onOpen: () => void
   onClose: () => void
   isOpen: boolean
+}
+
+const styles: Record<string, SystemStyleObject> = {
+  tableHeaderContainer: {
+    gap: 3,
+    paddingY: 4
+  },
+  tableContainer: {
+    w: 'full',
+    borderWidth: 1,
+    rounded: 'md',
+    padding: 4,
+    borderColor: 'black'
+  },
+  tableFooterContainer: {
+    paddingY: 4,
+    width: 'full',
+    justifyContent: 'end',
+    paddingRight: 10
+  },
+  input: {
+    borderWidth: 1,
+    rounded: 'lg',
+    borderColor: 'black',
+    w: '40'
+  }
 }
 
 const DataTable = ({ data, setPage, page, onOpen, isOpen, onClose }: TableProps) => {
@@ -55,11 +82,11 @@ const DataTable = ({ data, setPage, page, onOpen, isOpen, onClose }: TableProps)
 
   return (
     <>
-      <TableContainer w={'full'} borderWidth={1} rounded={'md'} padding={4} borderColor={'black'}>
-        <HStack gap={3} paddingY={4}>
-          <Input placeholder={'Nome'} borderWidth={1} rounded={'lg'} borderColor={'black'} w={'40'} value={nome} onChange={(e) => setNome(e.target.value)} />
-          <Input placeholder={'Perfil'} borderWidth={1} rounded={'lg'} borderColor={'black'} w={'40'} value={perfil} onChange={(e) => setPerfil(e.target.value)} />
-          <Input placeholder={'Email'} borderWidth={1} rounded={'lg'} borderColor={'black'} w={'40'} value={email} onChange={(e) => setEmail(e.target.value)} />
+      <TableContainer sx={styles.tableContainer}>
+        <HStack sx={styles.tableHeaderContainer}>
+          <Input placeholder={'Nome'} sx={styles.input} value={nome} onChange={(e) => setNome(e.target.value)} />
+          <Input placeholder={'Perfil'} sx={styles.input} value={perfil} onChange={(e) => setPerfil(e.target.value)} />
+          <Input placeholder={'Email'} sx={styles.input} value={email} onChange={(e) => setEmail(e.target.value)} />
           <Button onClick={cleanFilter} bgColor={'purple.600'} color={'white'} _hover={{}}>Limpar</Button>
         </HStack>
         <Table variant='simple' w={'full'}>
@@ -109,7 +136,7 @@ const DataTable = ({ data, setPage, page, onOpen, isOpen, onClose }: TableProps)
             ))}
           </Tbody>
         </Table>
-        <HStack paddingY={4} width={'full'} justifyContent={'end'} paddingRight={10}  >
+        <HStack sx={styles.tableFooterContainer}  >
           <HStack>
             <span>Pagina {page} de {numberOfPage} </span>
           </HStack>

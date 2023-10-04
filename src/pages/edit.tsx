@@ -1,4 +1,4 @@
-import { VStack } from '@chakra-ui/react'
+import { SystemStyleObject, VStack } from '@chakra-ui/react'
 import { useForm } from "react-hook-form"
 import { useParams } from 'react-router-dom'
 import * as yup from 'yup'
@@ -47,6 +47,17 @@ const Edit = () => {
     defaultValues: user
   })
 
+  const styles: Record<string, SystemStyleObject> = {
+    container: {
+      height: 'calc(100vh)',
+      bg: 'ghostwhite',
+      flexDir: 'column',
+      placeItems: 'center',
+      gap: '40',
+      paddingX: { lg: '24', xl: '80' }
+    }
+  }
+
   const onSubmit = async (data: FormType) => {
     try {
       const { status } = await request.put(`/user/${id}`, data)
@@ -65,7 +76,7 @@ const Edit = () => {
   }
 
   return (
-    <VStack height='calc(100vh)' bg={'ghostwhite'} flexDir={'column'} placeItems={'center'} gap={40} paddingX={{ lg: '24', xl: '80' }}>
+    <VStack sx={styles.container}>
       <Navbar />
       <FormBody
         type='edit'

@@ -8,6 +8,7 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
   Button,
+  SystemStyleObject,
 } from '@chakra-ui/react'
 import { request } from '../lib/http'
 import { toast } from 'react-toastify';
@@ -18,6 +19,19 @@ interface Props {
   onClose: () => void
   isOpen: boolean
   id: string
+}
+
+
+const styles: Record<string, SystemStyleObject> = {
+  header: {
+    fontSize: 'lg',
+    fontWeight: 'bold'
+  },
+  button: {
+    backgroundColor: 'red',
+    color: 'white',
+    _hover: {}
+  }
 }
 
 const DeleteDialog = ({ isOpen, onClose, id, user }: Props) => {
@@ -38,7 +52,7 @@ const DeleteDialog = ({ isOpen, onClose, id, user }: Props) => {
     >
       <AlertDialogOverlay>
         <AlertDialogContent>
-          <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+          <AlertDialogHeader sx={styles.header}>
             Deletar {user?.nome}
           </AlertDialogHeader>
 
@@ -50,7 +64,7 @@ const DeleteDialog = ({ isOpen, onClose, id, user }: Props) => {
             <Button ref={cancelRef} onClick={onClose}>
               Cancelar
             </Button>
-            <Button colorScheme='red' onClick={onDelete} ml={3}>
+            <Button sx={styles.button} onClick={onDelete} ml={3}>
               Deletar
             </Button>
           </AlertDialogFooter>

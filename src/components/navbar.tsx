@@ -1,4 +1,4 @@
-import { HStack, Link, Heading } from '@chakra-ui/react'
+import { HStack, Link, Heading, SystemStyleObject } from '@chakra-ui/react'
 import { Link as RouterLink } from 'react-router-dom'
 
 const RoutesList = [
@@ -6,11 +6,28 @@ const RoutesList = [
   { to: '/create', label: 'Cadastro' }
 ]
 
+const styles: Record<string, SystemStyleObject> = {
+  container: {
+    justifyContent: 'space-between',
+    py: 4,
+    borderBottomWidth: 1,
+    placeItems: 'center',
+    borderColor: 'black',
+    w: 'full'
+  },
+  heading: {
+    fontSize: 24
+  },
+  menu: {
+    gap: 6
+  }
+}
+
 const Navbar = () => {
   return (
-    <HStack justifyContent={'space-between'} py={4} borderBottomWidth={1} placeItems={'center'} borderColor={'black'} w={'full'}>
-      <Heading fontSize={24}>Teste Técnico</Heading>
-      <HStack gap={6}>
+    <HStack sx={styles.container}>
+      <Heading sx={styles.heading}>Teste Técnico</Heading>
+      <HStack sx={styles.menu}>
         {RoutesList.map(route => (
           <Link key={route.to} as={RouterLink} to={route.to}>
             {route.label}

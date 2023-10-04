@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { HStack } from '@chakra-ui/react'
+import { HStack, SystemStyleObject } from '@chakra-ui/react'
 import DataTable from '../components/table'
 import { useQuery } from '@tanstack/react-query'
 import { request } from '../lib/http'
@@ -9,10 +9,22 @@ import { userAtom } from '../lib/context'
 import { user } from '../types/user'
 import { useDisclosure } from '@chakra-ui/react'
 
+const styles: Record<string, SystemStyleObject> = {
+  container: {
+    height: 'calc(100vh)',
+    bg: 'ghostwhite',
+    flexDir: 'column',
+    placeItems: 'initial',
+    gap: '40',
+    paddingX: { base: '24', xl: '48', '2xl': '80' }
+  }
+}
+
 const Home = () => {
   const [users, setUsers] = useAtom(userAtom)
   const [page, setPage] = useState(1)
   const { isOpen, onOpen, onClose } = useDisclosure()
+
 
   const getusers = async () => {
     const { data: users } = await request.get<user[]>(`/user?_page=${page}&_limit=5`)
@@ -29,7 +41,7 @@ const Home = () => {
   }, [userList, error, setUsers])
 
   return (
-    <HStack height='calc(100vh)' bg={'ghostwhite'} flexDir={'column'} placeItems={'initial'} gap={40} paddingX={{ base: '24', xl: '48', '2xl': '80' }}>
+    <HStack sx={styles.container}>
       <Navbar />
       <DataTable
         data={users}
