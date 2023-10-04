@@ -9,21 +9,18 @@ import {
   AlertDialogOverlay,
   Button,
 } from '@chakra-ui/react'
-import { useAtom, useAtomValue } from 'jotai'
-import { userAtom, userId } from '../lib/context'
 import { request } from '../lib/http'
 import { toast } from 'react-toastify';
+import { user } from '../types/user'
 
 interface Props {
+  userCredentials: readonly user[]
   onClose: () => void
   isOpen: boolean
+  id: string
 }
 
-
-const DeleteDialog = ({ isOpen, onClose }: Props) => {
-
-  const [userCredentials, setUserCredentials] = useAtom(userAtom)
-  const id = useAtomValue(userId)
+const DeleteDialog = ({ isOpen, onClose, id, userCredentials }: Props) => {
 
   const user = userCredentials.filter(user => user.id === id)[0]
 
@@ -31,8 +28,6 @@ const DeleteDialog = ({ isOpen, onClose }: Props) => {
 
   const onDelete = () => {
     request.delete(`/user/${id}`)
-    setUserCredentials(userCredentials.filter(user => user.id !== id))
-    // setIsOpen(false)
     toast.success('O usuário foi deletado com sucesso')
   }
 

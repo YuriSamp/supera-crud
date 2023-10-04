@@ -6,7 +6,6 @@ import { request } from '../lib/http'
 import Navbar from '../components/navbar'
 import { useAtom } from 'jotai'
 import { userAtom } from '../lib/context'
-import DeleteDialog from '../components/alert-dialog'
 import { user } from '../types/user'
 import { useDisclosure } from '@chakra-ui/react'
 
@@ -37,8 +36,6 @@ const Home = () => {
         page={page}
         setPage={setPage}
         onOpen={onOpen}
-      />
-      <DeleteDialog
         isOpen={isOpen}
         onClose={onClose}
       />
