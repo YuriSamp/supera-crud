@@ -8,6 +8,7 @@ import { useAtom } from 'jotai'
 import { userAtom } from '../lib/context'
 import { user } from '../types/user'
 import { useDisclosure } from '@chakra-ui/react'
+import DeleteDialog from '../components/alert-dialog'
 
 const styles: Record<string, SystemStyleObject> = {
   container: {
@@ -23,6 +24,7 @@ const styles: Record<string, SystemStyleObject> = {
 const Home = () => {
   const [users, setUsers] = useAtom(userAtom)
   const [page, setPage] = useState(1)
+  const [id, setId] = useState('')
   const { isOpen, onOpen, onClose } = useDisclosure()
 
 
@@ -40,6 +42,8 @@ const Home = () => {
     setUsers(userList)
   }, [userList, error, setUsers])
 
+  const user = users.filter(user => user.id === id)[0]
+
   return (
     <HStack sx={styles.container}>
       <Navbar />
@@ -48,8 +52,13 @@ const Home = () => {
         page={page}
         setPage={setPage}
         onOpen={onOpen}
+        setId={setId}
+      />
+      <DeleteDialog
+        user={user}
         isOpen={isOpen}
         onClose={onClose}
+        id={id}
       />
     </HStack>
   )

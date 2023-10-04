@@ -21,15 +21,13 @@ import { Dispatch, SetStateAction, useState } from 'react'
 import dataDb from '../data/db.json'
 import { user } from '../types/user'
 import { ROW_COUNT } from '../config/constants'
-import DeleteDialog from './alert-dialog'
 
 export interface TableProps {
   data: readonly user[]
   page: number
   setPage: Dispatch<SetStateAction<number>>
+  setId: Dispatch<SetStateAction<string>>
   onOpen: () => void
-  onClose: () => void
-  isOpen: boolean
 }
 
 const styles: Record<string, SystemStyleObject> = {
@@ -58,13 +56,12 @@ const styles: Record<string, SystemStyleObject> = {
   }
 }
 
-const DataTable = ({ data, setPage, page, onOpen, isOpen, onClose }: TableProps) => {
+const DataTable = ({ data, setPage, page, onOpen, setId }: TableProps) => {
 
   const [nome, setNome] = useState('')
   const [perfil, setPerfil] = useState('')
   const [email, setEmail] = useState('')
 
-  const [id, setId] = useState('')
 
   const filteredData = data.filter(entry =>
     entry.name.toLowerCase().includes(nome.toLowerCase())
@@ -72,7 +69,6 @@ const DataTable = ({ data, setPage, page, onOpen, isOpen, onClose }: TableProps)
     && entry.email.toLowerCase().includes(email.toLowerCase()))
 
   const numberOfPage = Math.ceil(dataDb.user.length / ROW_COUNT)
-  const user = data.filter(user => user.id === id)[0]
 
   const cleanFilter = () => {
     setNome('')
@@ -146,12 +142,6 @@ const DataTable = ({ data, setPage, page, onOpen, isOpen, onClose }: TableProps)
           </HStack>
         </HStack>
       </TableContainer>
-      <DeleteDialog
-        user={user}
-        isOpen={isOpen}
-        onClose={onClose}
-        id={id}
-      />
     </>
   )
 }

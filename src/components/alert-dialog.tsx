@@ -53,7 +53,7 @@ const DeleteDialog = ({ isOpen, onClose, id, user }: Props) => {
       <AlertDialogOverlay>
         <AlertDialogContent>
           <AlertDialogHeader sx={styles.header}>
-            Deletar {user?.nome}
+            Deletar {user?.name}
           </AlertDialogHeader>
 
           <AlertDialogBody>

@@ -26,7 +26,7 @@ const formSchema = yup.object({
   age: yup.number().optional().typeError('Idade deve ser do tipo numerico')
 });
 
-export type FormType = yup.InferType<typeof formSchema>
+export interface FormType extends yup.InferType<typeof formSchema> { }
 
 const styles: Record<string, SystemStyleObject> = {
   container: {
