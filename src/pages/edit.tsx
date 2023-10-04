@@ -5,14 +5,15 @@ import * as yup from 'yup'
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup'
 import Navbar from '../components/navbar'
-import { request } from '../lib/http'
+import { request } from '../services/http'
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from '../config/routes';
 import FormBody from '../components/form';
 import { FormType } from './create';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { user } from '../types/user';
 import { useEffect } from 'react';
+import { updateUser } from '../services/http/requests';
 
 
 const formSchema = yup.object({
@@ -42,6 +43,7 @@ const styles: Record<string, SystemStyleObject> = {
   }
 }
 
+type MutationType = { data: FormType, id: string }
 
 const Edit = () => {
 
@@ -77,25 +79,24 @@ const Edit = () => {
       setValue('email', user.email)
       setValue('userType', user.userType)
     }
-  }, [user, setValue])
+  }, [user, setValue, id])
 
 
-
-  const onSubmit = async (data: FormType) => {
-    try {
-      const { status } = await request.put(`/user/${id}`, data)
-      if (status === 200) {
-        toast.success('Usuario editado com sucesso')
-        setTimeout(() => {
-          navigate(ROUTES.HOME)
-        }, 1000)
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        toast.error(error.message)
-        return
-      }
+  const mutation = useMutation({
+    mutationFn: ({ data, id }: MutationType) => updateUser(data, id),
+    onSuccess: () => {
+      toast.success('Usuario editado com sucesso')
+      setTimeout(() => {
+        navigate(ROUTES.HOME)
+      }, 1000)
+    },
+    onError: () => {
+      toast.error('Algo deu errado, tente novamente')
     }
+  })
+
+  const onSubmit = (data: FormType) => {
+    mutation.mutate({ data, id: String(id) })
   }
 
   return (

@@ -2,13 +2,13 @@ import { useState } from 'react'
 import { SystemStyleObject, VStack, Spinner } from '@chakra-ui/react'
 import DataTable from '../components/table'
 import { useQuery } from '@tanstack/react-query'
-import { request } from '../lib/http'
 import Navbar from '../components/navbar'
 import { user } from '../types/user'
 import { useDisclosure } from '@chakra-ui/react'
 import DeleteDialog from '../components/alert-dialog'
 import Filters from '../components/filters'
 import { toast } from 'react-toastify'
+import { getAllUsers } from '../services/http/requests'
 
 
 const styles: Record<string, SystemStyleObject> = {
@@ -28,14 +28,9 @@ const Home = () => {
   const [id, setId] = useState('')
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const getusers = async () => {
-    const { data: users } = await request.get<user[]>(`/user?_page=${page}&_limit=5`)
-    return users
-  }
-
   const { isLoading, refetch } = useQuery({
     queryKey: ['users', page],
-    queryFn: getusers,
+    queryFn: () => getAllUsers(page),
     onError: () => {
       toast.error('Ocorreu um erro ao fazer a requisição para o banco de dados')
     },
@@ -43,7 +38,6 @@ const Home = () => {
       setUsers(userList)
     }
   })
-
 
   const user = users.filter(user => user.id === id)[0]
 

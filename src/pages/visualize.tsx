@@ -2,9 +2,9 @@ import { SystemStyleObject, VStack } from '@chakra-ui/react'
 import { useParams } from 'react-router-dom';
 import Navbar from '../components/navbar';
 import FormBody from '../components/form';
-import { request } from '../lib/http';
 import { user } from '../types/user';
 import { useQuery } from '@tanstack/react-query';
+import { getUniqueUser } from '../services/http/requests';
 
 const styles: Record<string, SystemStyleObject> = {
   container: {
@@ -17,19 +17,13 @@ const styles: Record<string, SystemStyleObject> = {
   }
 }
 
-
 const Visualize = () => {
 
   const { id } = useParams()
 
-  const fetchuser = async () => {
-    const { data } = await request.get<user[]>(`/user?id=${id}`)
-    return data.at(0)
-  }
-
   const { data: user } = useQuery({
-    queryFn: fetchuser,
-    queryKey: ['user']
+    queryFn: () => getUniqueUser(String(id)),
+    queryKey: ['user', id]
   })
 
   return (

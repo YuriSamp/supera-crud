@@ -2,9 +2,9 @@ import { Button, HStack, Input, SystemStyleObject } from '@chakra-ui/react'
 import { Dispatch, SetStateAction } from 'react'
 import { useForm } from 'react-hook-form'
 import { user } from '../types/user'
-import { request } from '../lib/http'
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters, useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
+import { getFilteredusers } from '../services/http/requests'
 
 const styles: Record<string, SystemStyleObject> = {
   container: {
@@ -19,7 +19,7 @@ const styles: Record<string, SystemStyleObject> = {
   }
 }
 
-type FilterTypes = {
+export type FilterTypes = {
   name: string
   userType: string
   email: string
@@ -40,29 +40,8 @@ const Filters = ({ setUsers, refetch }: Props) => {
 
   const queryClient = useQueryClient()
 
-  const fetchuser = async ({ email, name, userType }: FilterTypes) => {
-    const queryParams = {} as FilterTypes;
-
-    if (email) {
-      queryParams.email = email;
-    }
-    if (name) {
-      queryParams.name = name;
-    }
-    if (userType) {
-      queryParams.userType = userType;
-    }
-
-    const queryString = new URLSearchParams(queryParams).toString();
-    const url = `/user${queryString ? `?${queryString}` : ''}`;
-
-    const { data } = await request.get(url)
-
-    return data
-  }
-
   const mutation = useMutation({
-    mutationFn: fetchuser,
+    mutationFn: getFilteredusers,
     onSuccess: (data: user[]) => {
       setUsers(data)
     },

@@ -86,7 +86,7 @@ const FormBody = (props: RegisterType) => {
               <Input placeholder='Idade' type='number'  {...props.register('age')} />
               <span style={{ color: 'red' }}>{props.errors?.age?.message}</span>
             </VStack>
-            <Button type='submit' bgColor={'purple.600'} color={'white'} _hover={{}} w={'full'}>Adicionar usuário</Button>
+            <Button type='submit' bgColor={'green.600'} color={'white'} _hover={{}} w={'full'}>{props.type === 'create' ? 'Adicionar usuário' : 'Editar usuário'}</Button>
           </VStack>
         </form>
       </VStack>
@@ -117,7 +117,6 @@ const FormBody = (props: RegisterType) => {
         <VStack sx={styles.inputContainer}>
           <Input type='number' value={props.defaultValues?.age || 'Não informado'} isDisabled />
         </VStack>
-        <Button type='submit' bgColor={'purple.600'} color={'white'} _hover={{}} w={'full'} isDisabled>Adicionar usuário</Button>
       </VStack>
     </VStack>
   )

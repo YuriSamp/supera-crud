@@ -10,10 +10,10 @@ import {
   Button,
   SystemStyleObject,
 } from '@chakra-ui/react'
-import { request } from '../lib/http'
 import { toast } from 'react-toastify';
 import { user } from '../types/user'
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters, useMutation, useQueryClient } from '@tanstack/react-query'
+import { removeUser } from '../services/http/requests';
 
 type Refetch = <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<user[], unknown>>
 
@@ -41,10 +41,6 @@ const DeleteDialog = ({ isOpen, onClose, id, user, refetch }: Props) => {
 
   const cancelRef = useRef(null)
   const queryClient = useQueryClient()
-
-  const removeUser = async (id: string) => {
-    request.delete(`/user/${id}`)
-  }
 
   const mutation = useMutation({
     mutationFn: removeUser,

@@ -1,12 +1,12 @@
 {
   "user": [
     {
-      "id": "0",
-      "name": "Marcelo",
+      "name": "Eduardo",
       "email": "joao@email.com",
       "userType": "Administrador",
+      "phone": "",
       "age": 30,
-      "phone": ""
+      "id": "0"
     },
     {
       "id": "1",

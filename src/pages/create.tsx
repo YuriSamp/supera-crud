@@ -3,14 +3,13 @@ import { useForm } from "react-hook-form"
 import * as yup from 'yup'
 import Navbar from '../components/navbar'
 import { toast } from 'react-toastify';
-import { request } from '../lib/http'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useNavigate } from "react-router-dom";
 import dataDb from '../data/db.json'
 import FormBody from '../components/form';
 import { ROUTES } from '../config/routes';
 import { useMutation } from '@tanstack/react-query';
-import { user } from '../types/user';
+import { addUser } from '../services/http/requests';
 
 const formSchema = yup.object({
   id: yup.string().optional(),
@@ -53,18 +52,6 @@ const Create = () => {
     resolver: yupResolver(formSchema)
   })
 
-  const addUser = async ({ email, name, userType, age, phone, id }: user) => {
-    const personObj = {
-      id,
-      email,
-      name,
-      userType,
-      age,
-      phone
-    }
-
-    await request.post('/user', personObj)
-  }
 
   const mutation = useMutation({
     mutationFn: addUser,
