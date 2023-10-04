@@ -76,6 +76,17 @@ const DataTable = ({ data, setPage, page, onOpen, setId }: TableProps) => {
     setEmail('')
   }
 
+  const onDelete = (id: string) => {
+    setId(id || '0')
+    onOpen()
+  }
+
+  const menuItens = (item: user) => [
+    { to: `/visualize/${item.id}`, label: 'Visualizar', onClick: undefined },
+    { to: `/edit/${item.id}`, label: 'Editar', onClick: undefined },
+    { to: null, label: 'Excluir', onClick: () => onDelete(String(item.id)), }
+  ]
+
   return (
     <>
       <TableContainer sx={styles.tableContainer}>
@@ -109,22 +120,17 @@ const DataTable = ({ data, setPage, page, onOpen, setId }: TableProps) => {
                       <MoreHorizontal />
                     </MenuButton>
                     <MenuList  >
-                      <MenuItem>
-                        <Link to={`/visualize/${item.id}`}>
-                          Visualizar
-                        </Link>
-                      </MenuItem>
-                      <MenuItem>
-                        <Link to={`/edit/${item.id}`}>
-                          Editar
-                        </Link>
-                      </MenuItem>
-                      <MenuItem onClick={() => {
-                        setId(item.id || '0')
-                        onOpen()
-                      }}>
-                        Excluir
-                      </MenuItem>
+                      {menuItens(item).map(menuItem => (
+                        <MenuItem onClick={menuItem.onClick}>
+                          {menuItem.to ?
+                            <Link to={menuItem.to}>
+                              {menuItem.label}
+                            </Link>
+                            :
+                            menuItem.label
+                          }
+                        </MenuItem>
+                      ))}
                     </MenuList>
                   </Menu>
                 </Td>
