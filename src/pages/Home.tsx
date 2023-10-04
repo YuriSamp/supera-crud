@@ -4,8 +4,6 @@ import DataTable from '../components/table'
 import { useQuery } from '@tanstack/react-query'
 import { request } from '../lib/http'
 import Navbar from '../components/navbar'
-import { useAtom } from 'jotai'
-import { userAtom } from '../lib/context'
 import { user } from '../types/user'
 import { useDisclosure } from '@chakra-ui/react'
 import DeleteDialog from '../components/alert-dialog'
@@ -25,7 +23,7 @@ const styles: Record<string, SystemStyleObject> = {
 }
 
 const Home = () => {
-  const [users, setUsers] = useAtom(userAtom)
+  const [users, setUsers] = useState<user[]>([])
   const [page, setPage] = useState(1)
   const [id, setId] = useState('')
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -37,7 +35,7 @@ const Home = () => {
   }
 
   const { data: userList, error, isLoading, refetch } = useQuery({
-    queryKey: ['user', page],
+    queryKey: ['users', page],
     queryFn: getusers,
     onError: () => {
       toast.error('Ocorreu um erro ao fazer a requisição para o banco de dados')

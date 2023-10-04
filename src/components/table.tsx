@@ -86,7 +86,7 @@ const DataTable = ({ data, setPage, page, onOpen, setId }: TableProps) => {
                   </MenuButton>
                   <MenuList  >
                     {menuItens(item).map(menuItem => (
-                      <MenuItem onClick={menuItem.onClick}>
+                      <MenuItem onClick={menuItem.onClick} key={menuItem.label}>
                         {menuItem.to ?
                           <Link to={menuItem.to}>
                             {menuItem.label}

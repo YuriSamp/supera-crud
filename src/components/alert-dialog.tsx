@@ -50,7 +50,7 @@ const DeleteDialog = ({ isOpen, onClose, id, user, refetch }: Props) => {
     mutationFn: removeUser,
     onSuccess: () => {
       toast.success('O usuário foi deletado com sucesso')
-      queryClient.invalidateQueries({ queryKey: ['user'] })
+      queryClient.invalidateQueries({ queryKey: ['users'] })
       refetch()
       onClose()
     },

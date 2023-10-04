@@ -3,8 +3,6 @@ import { useForm } from "react-hook-form"
 import { useParams } from 'react-router-dom'
 import * as yup from 'yup'
 import { toast } from 'react-toastify';
-import { useAtomValue } from 'jotai'
-import { userAtom } from '../lib/context'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Navbar from '../components/navbar'
 import { request } from '../lib/http'
@@ -12,6 +10,9 @@ import { useNavigate } from "react-router-dom";
 import { ROUTES } from '../config/routes';
 import FormBody from '../components/form';
 import { FormType } from './create';
+import { useQuery } from '@tanstack/react-query';
+import { user } from '../types/user';
+import { useEffect } from 'react';
 
 
 const formSchema = yup.object({
@@ -30,34 +31,55 @@ const formSchema = yup.object({
   age: yup.number().optional().typeError('Idade deve ser do tipo numerico')
 });
 
+const styles: Record<string, SystemStyleObject> = {
+  container: {
+    height: 'calc(100vh)',
+    bg: 'ghostwhite',
+    flexDir: 'column',
+    placeItems: 'center',
+    gap: '40',
+    paddingX: { lg: '24', xl: '80' }
+  }
+}
+
 
 const Edit = () => {
 
   const navigate = useNavigate()
-
-  const users = useAtomValue(userAtom)
   const { id } = useParams()
-  const user = users.filter(user => user.id === id)[0]
+
+
+  const fetchuser = async () => {
+    const { data } = await request.get<user[]>(`/user?id=${id}`)
+    return data.at(0)
+  }
+
+  const { data: user } = useQuery({
+    queryFn: fetchuser,
+    queryKey: ['user']
+  })
 
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    setValue
   } = useForm<yup.InferType<typeof formSchema>>({
     resolver: yupResolver(formSchema),
     defaultValues: user
   })
 
-  const styles: Record<string, SystemStyleObject> = {
-    container: {
-      height: 'calc(100vh)',
-      bg: 'ghostwhite',
-      flexDir: 'column',
-      placeItems: 'center',
-      gap: '40',
-      paddingX: { lg: '24', xl: '80' }
+  useEffect(() => {
+    if (user) {
+      setValue('name', user.name)
+      setValue('age', user.age)
+      setValue('phone', user.phone)
+      setValue('email', user.email)
+      setValue('userType', user.userType)
     }
-  }
+  }, [user, setValue])
+
+
 
   const onSubmit = async (data: FormType) => {
     try {
@@ -85,7 +107,7 @@ const Edit = () => {
         title='Editar um usuário'
         errors={errors}
         onSubmit={handleSubmit(onSubmit)}
-        defaultValues={user}
+        defaultValues={user as user}
       />
     </VStack>
   )

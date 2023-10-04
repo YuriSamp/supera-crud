@@ -1,9 +1,10 @@
 import { SystemStyleObject, VStack } from '@chakra-ui/react'
-import { useAtomValue } from 'jotai';
 import { useParams } from 'react-router-dom';
-import { userAtom } from '../lib/context';
 import Navbar from '../components/navbar';
 import FormBody from '../components/form';
+import { request } from '../lib/http';
+import { user } from '../types/user';
+import { useQuery } from '@tanstack/react-query';
 
 const styles: Record<string, SystemStyleObject> = {
   container: {
@@ -19,9 +20,17 @@ const styles: Record<string, SystemStyleObject> = {
 
 const Visualize = () => {
 
-  const users = useAtomValue(userAtom)
   const { id } = useParams()
-  const user = users.filter(user => user.id === id)[0]
+
+  const fetchuser = async () => {
+    const { data } = await request.get<user[]>(`/user?id=${id}`)
+    return data.at(0)
+  }
+
+  const { data: user } = useQuery({
+    queryFn: fetchuser,
+    queryKey: ['user']
+  })
 
   return (
     <VStack sx={styles.container}>
@@ -29,7 +38,7 @@ const Visualize = () => {
       <FormBody
         type='visualize'
         title='Informações do usuário'
-        defaultValues={user}
+        defaultValues={user as user}
       />
     </VStack>
   )
