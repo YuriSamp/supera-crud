@@ -1,13 +1,16 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, } from 'vitest';
 import { render, fireEvent } from './test-utils';
 import Create from '../../../pages/create';
 import { screen } from '@testing-library/react';
-import Edit from '../../../pages/edit';
+import FormBody from '..';
 
-// vi.mock('react-router-dom', () => ({
-//   ...vi.importActual('react-router-dom'),
-//   useSearchParams: () => [new URLSearchParams({ id: '1' })]
-// }))
+const mockedData = {
+  id: "4",
+  name: "Pedro",
+  email: "pedro@email.com",
+  userType: "Usuário Comum",
+  age: 22
+}
 
 describe('form test', () => {
   it('deve renderizar o componente corretamente', () => {
@@ -27,9 +30,18 @@ describe('form test', () => {
     fireEvent.click(screen.getByText('Adicionar usuário'));
 
     expect(await screen.findByText('Nome é um campo obrigatorio')).toBeTruthy();
+    expect(await screen.findByText('Email é um campo obrigatorio')).toBeTruthy();
+    expect(await screen.findByText('Perfil é um campo obrigatorio')).toBeTruthy();
   });
-  it('deve renderizar os defaultValues quando o componente for carregado', () => {
-    render(<Edit />)
 
+  it('deve renderizar os defaultValues quando o componente for carregado', () => {
+    render(<FormBody type='visualize' defaultValues={mockedData} title='Teste' />)
+
+    expect(screen.getByDisplayValue('Pedro')).toBeTruthy()
+    expect(screen.getByDisplayValue('22')).toBeTruthy()
+    expect(screen.getByDisplayValue('pedro@email.com')).toBeTruthy()
+    expect(screen.getByDisplayValue('Usuário Comum')).toBeTruthy()
+    //Valor default de telefone
+    expect(screen.getByDisplayValue('(00) 00000-0000')).toBeTruthy()
   })
 });
