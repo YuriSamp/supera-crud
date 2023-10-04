@@ -12,7 +12,7 @@ const Navbar = () => {
       <Heading fontSize={24}>Teste Técnico</Heading>
       <HStack gap={6}>
         {RoutesList.map(route => (
-          <Link as={RouterLink} to={route.to}>
+          <Link key={route.to} as={RouterLink} to={route.to}>
             {route.label}
           </Link>
         ))}

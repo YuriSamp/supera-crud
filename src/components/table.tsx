@@ -17,7 +17,7 @@ import {
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useSetAtom } from 'jotai'
-import { deleteModalAtom, userId } from '../lib/context'
+import { userId } from '../lib/context'
 import { Dispatch, SetStateAction, useState } from 'react'
 import dataDb from '../data/db.json'
 import { user } from '../types/user'
@@ -27,12 +27,12 @@ export interface TableProps {
   data: readonly user[]
   page: number
   setPage: Dispatch<SetStateAction<number>>
+  onOpen: () => void
 }
 
-const DataTable = ({ data, setPage, page }: TableProps) => {
+const DataTable = ({ data, setPage, page, onOpen }: TableProps) => {
 
   const setId = useSetAtom(userId)
-  const setIsOpen = useSetAtom(deleteModalAtom)
 
   const [nome, setNome] = useState('')
   const [perfil, setPerfil] = useState('')
@@ -95,7 +95,7 @@ const DataTable = ({ data, setPage, page }: TableProps) => {
                     </MenuItem>
                     <MenuItem onClick={() => {
                       setId(item.id || '0')
-                      setIsOpen(true)
+                      onOpen()
                     }}>
                       Excluir
                     </MenuItem>
