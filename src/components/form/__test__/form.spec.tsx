@@ -1,7 +1,13 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { render, fireEvent } from './test-utils';
-import Create from '../pages/create';
+import Create from '../../../pages/create';
 import { screen } from '@testing-library/react';
+import Edit from '../../../pages/edit';
+
+// vi.mock('react-router-dom', () => ({
+//   ...vi.importActual('react-router-dom'),
+//   useSearchParams: () => [new URLSearchParams({ id: '1' })]
+// }))
 
 describe('form test', () => {
   it('deve renderizar o componente corretamente', () => {
@@ -22,4 +28,8 @@ describe('form test', () => {
 
     expect(await screen.findByText('Nome é um campo obrigatorio')).toBeTruthy();
   });
+  it('deve renderizar os defaultValues quando o componente for carregado', () => {
+    render(<Edit />)
+
+  })
 });

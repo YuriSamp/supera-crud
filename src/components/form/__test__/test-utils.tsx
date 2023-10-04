@@ -1,15 +1,20 @@
 import { RenderOptions, render } from '@testing-library/react'
 import { ChakraProvider } from '@chakra-ui/react'
 import { BrowserRouter } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 //eslint-disable-next-line
 const AllTheProviders = ({ children }: { children: JSX.Element }) => {
+  const queryClient = new QueryClient()
+
   return (
-    <BrowserRouter>
-      <ChakraProvider>
-        {children}
-      </ChakraProvider>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient} >
+      <BrowserRouter>
+        <ChakraProvider>
+          {children}
+        </ChakraProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
   )
 }
 

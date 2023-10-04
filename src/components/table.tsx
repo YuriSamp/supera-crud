@@ -26,6 +26,7 @@ export interface TableProps {
   setPage: Dispatch<SetStateAction<number>>
   setId: Dispatch<SetStateAction<string>>
   onOpen: () => void
+  isFiltered: boolean
 }
 
 const styles: Record<string, SystemStyleObject> = {
@@ -44,7 +45,7 @@ const styles: Record<string, SystemStyleObject> = {
   },
 }
 
-const DataTable = ({ data, setPage, page, onOpen, setId }: TableProps) => {
+const DataTable = ({ data, setPage, page, onOpen, setId, isFiltered }: TableProps) => {
 
   const numberOfPage = Math.ceil(dataDb.user.length / ROW_COUNT)
 
@@ -58,6 +59,8 @@ const DataTable = ({ data, setPage, page, onOpen, setId }: TableProps) => {
     { to: `/edit/${item.id}`, label: 'Editar', onClick: undefined },
     { to: null, label: 'Excluir', onClick: () => onDelete(String(item.id)), }
   ]
+
+  console.log(page)
 
   return (
     <TableContainer sx={styles.tableContainer}>
@@ -103,7 +106,7 @@ const DataTable = ({ data, setPage, page, onOpen, setId }: TableProps) => {
           ))}
         </Tbody>
       </Table>
-      {data.length > 5 &&
+      {!isFiltered &&
         <HStack sx={styles.tableFooterContainer}  >
           <HStack>
             <span>Pagina {page} de {numberOfPage} </span>

@@ -2,7 +2,7 @@ import { Button, Heading, Input, Select, SystemStyleObject, VStack } from '@chak
 import { FieldErrors, SubmitErrorHandler, SubmitHandler, UseFormRegister } from 'react-hook-form';
 import InputMask from 'react-input-mask';
 import { BaseSyntheticEvent, FormEventHandler } from 'react';
-import { user } from '../types/user';
+import { user } from '../../types/user';
 
 type SubmitType = (e?: BaseSyntheticEvent<object, SubmitHandler<user>, SubmitErrorHandler<user>> | undefined) => Promise<void>
 
@@ -64,15 +64,15 @@ const FormBody = (props: RegisterType) => {
         <form onSubmit={props.onSubmit as unknown as FormEventHandler<HTMLFormElement>} >
           <VStack sx={styles.formContainer}>
             <VStack sx={styles.inputContainer}>
-              <Input placeholder='Nome' {...props.register('name')} />
+              <Input placeholder='Nome' {...props.register('name', { required: true })} />
               <span style={{ color: 'red' }}>{props.errors?.name?.message}</span>
             </VStack>
             <VStack sx={styles.inputContainer}>
-              <Input placeholder='Email' type='email' {...props.register('email')} />
+              <Input placeholder='Email' type='email' {...props.register('email', { required: true })} />
               <span style={{ color: 'red' }}>{props.errors?.email?.message}</span>
             </VStack>
             <VStack sx={styles.inputContainer}>
-              <Select placeholder='Selecione o perfil' {...props.register('userType')} >
+              <Select placeholder='Selecione o perfil' {...props.register('userType', { required: true })} >
                 <option value='Administrador'>Administrador</option>
                 <option value='Usuário Comum'>Usuário Comum</option>
               </Select>

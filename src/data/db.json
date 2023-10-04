@@ -100,6 +100,22 @@
       "email": "paula@email.com",
       "userType": "Usuário Comum",
       "age": 31
+    },
+    {
+      "id": "14",
+      "email": "yurisamp123@gmail.com",
+      "name": "teste",
+      "userType": "Administrador",
+      "age": 21,
+      "phone": "(11) 11111-11__"
+    },
+    {
+      "id": "15",
+      "email": "yurisamp123@gmail.com",
+      "name": "teste2",
+      "userType": "Administrador",
+      "age": 34,
+      "phone": "(11) 11111-1111"
     }
   ]
 }

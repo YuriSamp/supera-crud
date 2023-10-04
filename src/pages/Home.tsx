@@ -27,6 +27,7 @@ const Home = () => {
   const [page, setPage] = useState(1)
   const [id, setId] = useState('')
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const [isFiltered, setIsFiltered] = useState(false)
 
   const { isLoading, refetch } = useQuery({
     queryKey: ['users', page],
@@ -45,7 +46,7 @@ const Home = () => {
     <VStack sx={styles.container}>
       <Navbar />
       <VStack gap={isLoading ? 20 : 0}>
-        <Filters setUsers={setUsers} refetch={refetch} />
+        <Filters setUsers={setUsers} refetch={refetch} setIsFiltered={setIsFiltered} />
         {isLoading ? < Spinner /> :
           <DataTable
             data={users}
@@ -53,6 +54,7 @@ const Home = () => {
             setPage={setPage}
             onOpen={onOpen}
             setId={setId}
+            isFiltered={isFiltered}
           />
         }
       </VStack>

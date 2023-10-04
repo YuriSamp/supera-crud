@@ -28,9 +28,10 @@ export type FilterTypes = {
 interface Props {
   setUsers: Dispatch<SetStateAction<user[]>>
   refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<user[], unknown>>
+  setIsFiltered: Dispatch<SetStateAction<boolean>>
 }
 
-const Filters = ({ setUsers, refetch }: Props) => {
+const Filters = ({ setUsers, refetch, setIsFiltered }: Props) => {
 
   const {
     register,
@@ -44,6 +45,7 @@ const Filters = ({ setUsers, refetch }: Props) => {
     mutationFn: getFilteredusers,
     onSuccess: (data: user[]) => {
       setUsers(data)
+      setIsFiltered(true)
     },
     onError: () => {
       toast.error('Algo deu errado, tente novamente')
@@ -60,6 +62,7 @@ const Filters = ({ setUsers, refetch }: Props) => {
     setValue('name', '')
     setValue('email', '')
     setValue('userType', '')
+    setIsFiltered(false)
   }
 
 
