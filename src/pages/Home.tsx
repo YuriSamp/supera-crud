@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { HStack, SystemStyleObject } from '@chakra-ui/react'
+import { SystemStyleObject, VStack } from '@chakra-ui/react'
 import DataTable from '../components/table'
 import { useQuery } from '@tanstack/react-query'
 import { request } from '../lib/http'
@@ -9,6 +9,7 @@ import { userAtom } from '../lib/context'
 import { user } from '../types/user'
 import { useDisclosure } from '@chakra-ui/react'
 import DeleteDialog from '../components/alert-dialog'
+import Filters from '../components/filters'
 
 const styles: Record<string, SystemStyleObject> = {
   container: {
@@ -16,7 +17,7 @@ const styles: Record<string, SystemStyleObject> = {
     bg: 'ghostwhite',
     flexDir: 'column',
     placeItems: 'initial',
-    gap: '40',
+    gap: 28,
     paddingX: { base: '24', xl: '48', '2xl': '80' }
   }
 }
@@ -45,22 +46,25 @@ const Home = () => {
   const user = users.filter(user => user.id === id)[0]
 
   return (
-    <HStack sx={styles.container}>
+    <VStack sx={styles.container}>
       <Navbar />
-      <DataTable
-        data={users}
-        page={page}
-        setPage={setPage}
-        onOpen={onOpen}
-        setId={setId}
-      />
+      <VStack>
+        <Filters />
+        <DataTable
+          data={users}
+          page={page}
+          setPage={setPage}
+          onOpen={onOpen}
+          setId={setId}
+        />
+      </VStack>
       <DeleteDialog
         user={user}
         isOpen={isOpen}
         onClose={onClose}
         id={id}
       />
-    </HStack>
+    </VStack>
   )
 }
 
