@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { SystemStyleObject, VStack } from '@chakra-ui/react'
+import { SystemStyleObject, VStack, Spinner } from '@chakra-ui/react'
 import DataTable from '../components/table'
 import { useQuery } from '@tanstack/react-query'
 import { request } from '../lib/http'
@@ -10,6 +10,8 @@ import { user } from '../types/user'
 import { useDisclosure } from '@chakra-ui/react'
 import DeleteDialog from '../components/alert-dialog'
 import Filters from '../components/filters'
+import { toast } from 'react-toastify'
+
 
 const styles: Record<string, SystemStyleObject> = {
   container: {
@@ -34,7 +36,13 @@ const Home = () => {
     return users
   }
 
-  const { data: userList, error } = useQuery({ queryKey: ['user', page], queryFn: getusers })
+  const { data: userList, error, isLoading } = useQuery({
+    queryKey: ['user', page],
+    queryFn: getusers,
+    onError: () => {
+      toast.error('Ocorreu um erro ao fazer a requisição para o banco de dados')
+    }
+  })
 
   useEffect(() => {
     if (error || !userList) {
@@ -48,15 +56,17 @@ const Home = () => {
   return (
     <VStack sx={styles.container}>
       <Navbar />
-      <VStack>
+      <VStack gap={isLoading ? 20 : 0}>
         <Filters />
-        <DataTable
-          data={users}
-          page={page}
-          setPage={setPage}
-          onOpen={onOpen}
-          setId={setId}
-        />
+        {isLoading ? < Spinner /> :
+          <DataTable
+            data={users}
+            page={page}
+            setPage={setPage}
+            onOpen={onOpen}
+            setId={setId}
+          />
+        }
       </VStack>
       <DeleteDialog
         user={user}
