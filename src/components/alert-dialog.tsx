@@ -29,7 +29,6 @@ const DeleteDialog = ({ isOpen, onClose }: Props) => {
 
   const cancelRef = useRef(null)
 
-
   const onDelete = () => {
     request.delete(`/user/${id}`)
     setUserCredentials(userCredentials.filter(user => user.id !== id))
