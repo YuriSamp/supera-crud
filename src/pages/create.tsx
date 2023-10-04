@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import dataDb from '../data/db.json'
 import FormBody from '../components/form';
 import { ROUTES } from '../config/routes';
+import { useMutation } from '@tanstack/react-query';
+import { user } from '../types/user';
 
 const formSchema = yup.object({
   id: yup.string().optional(),
@@ -51,8 +53,33 @@ const Create = () => {
     resolver: yupResolver(formSchema)
   })
 
+  const addUser = async ({ email, name, userType, age, phone, id }: user) => {
+    const personObj = {
+      id,
+      email,
+      name,
+      userType,
+      age,
+      phone
+    }
 
-  const onSubmit = async (data: FormType) => {
+    await request.post('/user', personObj)
+  }
+
+  const mutation = useMutation({
+    mutationFn: addUser,
+    onSuccess: () => {
+      toast.success('Usuario adicionado com sucesso')
+      setTimeout(() => {
+        navigate(ROUTES.HOME)
+      }, 1000)
+    },
+    onError: () => {
+      toast.error('Algo deu errado tente novamente')
+    }
+  },)
+
+  const onSubmit = (data: FormType) => {
     const { email, name, userType, age, phone } = data
 
     const personObj = {
@@ -64,16 +91,7 @@ const Create = () => {
       phone
     }
 
-    const { status } = await request.post('/user', personObj)
-    if (status === 201) {
-      toast.success('Usuario adicionado com sucesso')
-      setTimeout(() => {
-        navigate(ROUTES.HOME)
-      }, 1000)
-    }
-
-    toast.error('Algo deu errado tente novamente')
-    return
+    mutation.mutate(personObj)
   }
 
   return (

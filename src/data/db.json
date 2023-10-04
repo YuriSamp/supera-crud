@@ -115,6 +115,14 @@
       "userType": "Administrador",
       "age": 33,
       "phone": "(11) 11111-1111"
+    },
+    {
+      "id": "16",
+      "email": "yurisamp123@gmail.com",
+      "name": "Bernardo",
+      "userType": "Administrador",
+      "age": 32,
+      "phone": "(21) 99999-9999"
     }
   ]
 }
