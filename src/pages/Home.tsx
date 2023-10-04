@@ -36,7 +36,7 @@ const Home = () => {
     return users
   }
 
-  const { data: userList, error, isLoading } = useQuery({
+  const { data: userList, error, isLoading, refetch } = useQuery({
     queryKey: ['user', page],
     queryFn: getusers,
     onError: () => {
@@ -73,6 +73,7 @@ const Home = () => {
         isOpen={isOpen}
         onClose={onClose}
         id={id}
+        refetch={refetch}
       />
     </VStack>
   )
