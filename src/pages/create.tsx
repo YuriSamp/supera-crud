@@ -10,9 +10,9 @@ import dataDb from '../data/db.json'
 import FormBody from '../components/form';
 import { ROUTES } from '../config/routes';
 
-export const formSchema = yup.object({
+const formSchema = yup.object({
   id: yup.string().optional(),
-  nome: yup
+  name: yup
     .string()
     .required('Nome é um campo obrigatorio')
     .min(3, 'Mínimo de 3 caractéres permitidos')
@@ -21,9 +21,9 @@ export const formSchema = yup.object({
     .string()
     .required('Email é um campo obrigatorio')
     .email('Pro favor insira um email válido'),
-  perfil: yup.string().required('Perfil é um campo obrigatorio'),
-  telefone: yup.string().optional(),
-  idade: yup.number().optional().typeError('Idade deve ser do tipo numerico'),
+  userType: yup.string().required('Perfil é um campo obrigatorio'),
+  phone: yup.string().optional(),
+  age: yup.number().optional().typeError('Idade deve ser do tipo numerico')
 });
 
 export type FormType = yup.InferType<typeof formSchema>
@@ -53,15 +53,15 @@ const Create = () => {
 
 
   const onSubmit = async (data: FormType) => {
-    const { email, nome, perfil, idade, telefone } = data
+    const { email, name, userType, age, phone } = data
 
     const personObj = {
       id: String(dataDb.user.length),
       email,
-      nome,
-      perfil,
-      idade,
-      telefone
+      name,
+      userType,
+      age,
+      phone
     }
 
     const { status } = await request.post('/user', personObj)

@@ -2,34 +2,26 @@ import { Button, Heading, Input, Select, SystemStyleObject, VStack } from '@chak
 import { FieldErrors, SubmitErrorHandler, SubmitHandler, UseFormRegister } from 'react-hook-form';
 import InputMask from 'react-input-mask';
 import { BaseSyntheticEvent, FormEventHandler } from 'react';
+import { user } from '../types/user';
 
-interface FormFields {
-  id?: string | undefined;
-  telefone?: string | undefined;
-  idade?: number | undefined;
-  nome: string;
-  email: string;
-  perfil: string;
-}
-
-type SubmitType = (e?: BaseSyntheticEvent<object, SubmitHandler<FormFields>, SubmitErrorHandler<FormFields>> | undefined) => Promise<void>
+type SubmitType = (e?: BaseSyntheticEvent<object, SubmitHandler<user>, SubmitErrorHandler<user>> | undefined) => Promise<void>
 
 type RegisterType = | {
   type: 'visualize'
   title: string
-  defaultValues: FormFields
+  defaultValues: user
 } | {
   type: 'edit'
   title: string
-  defaultValues: FormFields
-  register: UseFormRegister<FormFields>
-  errors: FieldErrors<FormFields>
+  defaultValues: user
+  register: UseFormRegister<user>
+  errors: FieldErrors<user>
   onSubmit: SubmitType
 } | {
   type: 'create'
   title: string
-  register: UseFormRegister<FormFields>
-  errors: FieldErrors<FormFields>
+  register: UseFormRegister<user>
+  errors: FieldErrors<user>
   onSubmit: SubmitType
 }
 
@@ -72,27 +64,27 @@ const FormBody = (props: RegisterType) => {
         <form onSubmit={props.onSubmit as unknown as FormEventHandler<HTMLFormElement>} >
           <VStack sx={styles.formContainer}>
             <VStack sx={styles.inputContainer}>
-              <Input placeholder='Nome' {...props.register('nome')} />
-              <span style={{ color: 'red' }}>{props.errors?.nome?.message}</span>
+              <Input placeholder='Nome' {...props.register('name')} />
+              <span style={{ color: 'red' }}>{props.errors?.name?.message}</span>
             </VStack>
             <VStack sx={styles.inputContainer}>
               <Input placeholder='Email' type='email' {...props.register('email')} />
               <span style={{ color: 'red' }}>{props.errors?.email?.message}</span>
             </VStack>
             <VStack sx={styles.inputContainer}>
-              <Select placeholder='Selecione o perfil' {...props.register('perfil')} >
+              <Select placeholder='Selecione o perfil' {...props.register('userType')} >
                 <option value='Administrador'>Administrador</option>
                 <option value='Usuário Comum'>Usuário Comum</option>
               </Select>
-              <span style={{ color: 'red' }}>{props.errors?.perfil?.message}</span>
+              <span style={{ color: 'red' }}>{props.errors?.userType?.message}</span>
             </VStack >
             <VStack sx={styles.inputContainer}>
-              <Input as={InputMask} mask={'(99) 99999-9999'} placeholder='Telefone' type='tel' {...props.register('telefone')} />
-              <span style={{ color: 'red' }}>{props.errors?.telefone?.message}</span>
+              <Input as={InputMask} mask={'(99) 99999-9999'} placeholder='Telefone' type='tel' {...props.register('phone')} />
+              <span style={{ color: 'red' }}>{props.errors?.phone?.message}</span>
             </VStack>
             <VStack sx={styles.inputContainer}>
-              <Input placeholder='Idade' type='number'  {...props.register('idade')} />
-              <span style={{ color: 'red' }}>{props.errors?.idade?.message}</span>
+              <Input placeholder='Idade' type='number'  {...props.register('age')} />
+              <span style={{ color: 'red' }}>{props.errors?.age?.message}</span>
             </VStack>
             <Button type='submit' bgColor={'purple.600'} color={'white'} _hover={{}} w={'full'}>Adicionar usuário</Button>
           </VStack>
@@ -108,22 +100,22 @@ const FormBody = (props: RegisterType) => {
       </Heading>
       <VStack sx={styles.formContainer}>
         <VStack sx={styles.inputContainer}>
-          <Input value={props.defaultValues?.nome} isDisabled />
+          <Input value={props.defaultValues?.name} isDisabled />
         </VStack>
         <VStack sx={styles.inputContainer}>
           <Input placeholder='Email' type='email' value={props.defaultValues?.email} isDisabled />
         </VStack>
         <VStack sx={styles.inputContainer}>
-          <Select value={props.defaultValues?.perfil} isDisabled>
+          <Select value={props.defaultValues?.userType} isDisabled>
             <option value='Administrador'>Administrador</option>
             <option value='Usuário Comum'>Usuário Comum</option>
           </Select>
         </VStack >
         <VStack sx={styles.inputContainer}>
-          <Input as={InputMask} mask={'(99) 99999-9999'} type='tel' value={props.defaultValues?.telefone || '00 00000 0000'} isDisabled />
+          <Input as={InputMask} mask={'(99) 99999-9999'} type='tel' value={props.defaultValues?.phone || '00 00000 0000'} isDisabled />
         </VStack>
         <VStack sx={styles.inputContainer}>
-          <Input type='number' value={props.defaultValues?.idade || 'Não informado'} isDisabled />
+          <Input type='number' value={props.defaultValues?.age || 'Não informado'} isDisabled />
         </VStack>
         <Button type='submit' bgColor={'purple.600'} color={'white'} _hover={{}} w={'full'} isDisabled>Adicionar usuário</Button>
       </VStack>

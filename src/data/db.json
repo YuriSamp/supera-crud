@@ -2,119 +2,119 @@
   "user": [
     {
       "id": "0",
-      "nome": "Marcelo",
+      "name": "Marcelo",
       "email": "joao@email.com",
-      "perfil": "Administrador",
-      "idade": 30,
-      "telefone": ""
+      "userType": "Administrador",
+      "age": 30,
+      "phone": ""
     },
     {
       "id": "1",
-      "nome": "Maria",
+      "name": "Maria",
       "email": "maria@email.com",
-      "perfil": "Administrador",
-      "idade": 35
+      "userType": "Administrador",
+      "age": 35
     },
     {
       "id": "2",
-      "nome": "Carlos",
+      "name": "Carlos",
       "email": "carlos@email.com",
-      "perfil": "Usuário Comum",
-      "idade": 25
+      "userType": "Usuário Comum",
+      "age": 25
     },
     {
       "id": "3",
-      "nome": "Ana",
+      "name": "Ana",
       "email": "ana@email.com",
-      "perfil": "Usuário Comum",
-      "idade": 28
+      "userType": "Usuário Comum",
+      "age": 28
     },
     {
       "id": "4",
-      "nome": "Pedro",
+      "name": "Pedro",
       "email": "pedro@email.com",
-      "perfil": "Usuário Comum",
-      "idade": 22
+      "userType": "Usuário Comum",
+      "age": 22
     },
     {
       "id": "5",
-      "nome": "Sofia",
+      "name": "Sofia",
       "email": "sofia@email.com",
-      "perfil": "Administrador",
-      "idade": 32,
-      "telefone": ""
+      "userType": "Administrador",
+      "age": 32,
+      "phone": ""
     },
     {
       "id": "6",
-      "nome": "João",
+      "name": "João",
       "email": "joao2@email.com",
-      "perfil": "Administrador",
-      "idade": 40
+      "userType": "Administrador",
+      "age": 40
     },
     {
       "id": "7",
-      "nome": "Mariana",
+      "name": "Mariana",
       "email": "mariana@email.com",
-      "perfil": "Usuário Comum",
-      "idade": 27
+      "userType": "Usuário Comum",
+      "age": 27
     },
     {
       "id": "8",
-      "nome": "Lucas",
+      "name": "Lucas",
       "email": "lucas@email.com",
-      "perfil": "Usuário Comum",
-      "idade": 24
+      "userType": "Usuário Comum",
+      "age": 24
     },
     {
       "id": "9",
-      "nome": "Isabela",
+      "name": "Isabela",
       "email": "isabela@email.com",
-      "perfil": "Usuário Comum",
-      "idade": 29
+      "userType": "Usuário Comum",
+      "age": 29
     },
     {
       "id": "10",
-      "nome": "Ricardo",
+      "name": "Ricardo",
       "email": "ricardo@email.com",
-      "perfil": "Administrador",
-      "idade": 37,
-      "telefone": ""
+      "userType": "Administrador",
+      "age": 37,
+      "phone": ""
     },
     {
       "id": "11",
-      "nome": "Fernanda",
+      "name": "Fernanda",
       "email": "fernanda@email.com",
-      "perfil": "Administrador",
-      "idade": 33
+      "userType": "Administrador",
+      "age": 33
     },
     {
       "id": "12",
-      "nome": "Luis",
+      "name": "Luis",
       "email": "luis@email.com",
-      "perfil": "Usuário Comum",
-      "idade": 26
+      "userType": "Usuário Comum",
+      "age": 26
     },
     {
       "id": "13",
-      "nome": "Paula",
+      "name": "Paula",
       "email": "paula@email.com",
-      "perfil": "Usuário Comum",
-      "idade": 31
+      "userType": "Usuário Comum",
+      "age": 31
     },
     {
       "id": "14",
-      "nome": "Gustavo",
+      "name": "Gustavo",
       "email": "gustavo@email.com",
-      "perfil": "Usuário Comum",
-      "idade": 23
+      "userType": "Usuário Comum",
+      "age": 23
     },
     {
       "id": "15",
       "email": "yurisamp123@gmail.com",
-      "nome": "Miguel",
-      "perfil": "Administrador",
-      "idade": 33,
-      "telefone": "(11) 11111-1111"
+      "name": "Miguel",
+      "userType": "Administrador",
+      "age": 33,
+      "phone": "(11) 11111-1111"
     }
   ]
 }

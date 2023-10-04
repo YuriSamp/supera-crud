@@ -67,8 +67,8 @@ const DataTable = ({ data, setPage, page, onOpen, isOpen, onClose }: TableProps)
   const [id, setId] = useState('')
 
   const filteredData = data.filter(entry =>
-    entry.nome.toLowerCase().includes(nome.toLowerCase())
-    && entry.perfil.toLowerCase().includes(perfil.toLowerCase())
+    entry.name.toLowerCase().includes(nome.toLowerCase())
+    && entry.userType.toLowerCase().includes(perfil.toLowerCase())
     && entry.email.toLowerCase().includes(email.toLowerCase()))
 
   const numberOfPage = Math.ceil(dataDb.user.length / ROW_COUNT)
@@ -103,10 +103,10 @@ const DataTable = ({ data, setPage, page, onOpen, isOpen, onClose }: TableProps)
             {filteredData.map(item => (
               <Tr key={item.id}>
                 <Td>{item.id && Number(item.id) + 1}</Td>
-                <Td>{item.nome}</Td>
+                <Td>{item.name}</Td>
                 <Td >{item.email}</Td>
-                <Td >{item.perfil}</Td>
-                <Td >{item.idade}</Td>
+                <Td >{item.userType}</Td>
+                <Td >{item.age}</Td>
                 <Td >
                   <Menu>
                     <MenuButton  >

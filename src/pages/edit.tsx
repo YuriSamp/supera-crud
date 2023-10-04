@@ -13,9 +13,10 @@ import { ROUTES } from '../config/routes';
 import FormBody from '../components/form';
 import { FormType } from './create';
 
+
 const formSchema = yup.object({
   id: yup.string().optional(),
-  nome: yup
+  name: yup
     .string()
     .required('Nome é um campo obrigatorio')
     .min(3, 'Mínimo de 3 caractéres permitidos')
@@ -24,9 +25,9 @@ const formSchema = yup.object({
     .string()
     .required('Email é um campo obrigatorio')
     .email('Pro favor insira um email válido'),
-  perfil: yup.string().required('Perfil é um campo obrigatorio'),
-  telefone: yup.string().optional(),
-  idade: yup.number().optional().typeError('Idade deve ser do tipo numerico'),
+  userType: yup.string().required('Perfil é um campo obrigatorio'),
+  phone: yup.string().optional(),
+  age: yup.number().optional().typeError('Idade deve ser do tipo numerico')
 });
 
 

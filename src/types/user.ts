@@ -1,4 +1,8 @@
-import * as yup from 'yup';
-import { formSchema } from '../pages/create';
-
-export type user = yup.InferType<typeof formSchema>;
+export interface user {
+  id?: string;
+  phone?: string;
+  age?: number;
+  name: string;
+  email: string;
+  userType: string;
+}
