@@ -20,7 +20,7 @@ import dataDb from '../data/db.json'
 import { user } from '../types/user'
 import { ROW_COUNT } from '../config/constants'
 
-export interface TableProps {
+interface TableProps {
   data: readonly user[]
   page: number
   setPage: Dispatch<SetStateAction<number>>
