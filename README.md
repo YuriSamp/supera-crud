@@ -1,27 +1,53 @@
-# React + TypeScript + Vite
+## Sobre o projeto
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Pequeno teste da empresa para testar a organização do meu código e meu dominio sobre as bibliotecas impostas para o teste
 
-Currently, two official plugins are available:
+## Preview do layout
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![layout](./public//preview.png)
 
-## Expanding the ESLint configuration
+## Stack utilizada
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- @tanstack/react-query
+- react-input-mask
+- react-router-dom
+- react-toastify
+- lucide-react
+- json-server
+- axios
+- react
+- yup
 
-- Configure the top-level `parserOptions` property like this:
+## Rodando localmente
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+1. clone o repositorio localmente na sua maquina.
+
+```bash
+git clone https://github.com/YuriSamp/supera-crud
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. Instalando as dependencias.
+
+```bash
+pnpm install
+```
+
+Para rodar o projeto, abra 2 terminais, um para rodar o front e outro para rodar a fake api
+
+3. Front
+
+```bash
+pnpm dev
+```
+
+4. Fake-api
+
+```bash
+json-server --watch src/data/db.json
+```
+
+5. Para rodar os testes
+
+```bash
+pnpm test
+```

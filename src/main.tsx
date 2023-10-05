@@ -1,7 +1,30 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import { ChakraProvider } from '@chakra-ui/react'
+import { BrowserRouter } from 'react-router-dom';
+import Routes from './routes.tsx'
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from 'react-toastify';
+
+export const App = () => {
+
+  const queryClient = new QueryClient()
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <ChakraProvider>
+          <ToastContainer />
+          <Routes />
+        </ChakraProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
+  )
+}
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

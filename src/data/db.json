@@ -1,0 +1,121 @@
+{
+  "user": [
+    {
+      "name": "Eduardo",
+      "email": "joao@email.com",
+      "userType": "Administrador",
+      "phone": "",
+      "age": 30,
+      "id": "0"
+    },
+    {
+      "id": "1",
+      "name": "Maria",
+      "email": "maria@email.com",
+      "userType": "Administrador",
+      "age": 35
+    },
+    {
+      "id": "2",
+      "name": "Carlos",
+      "email": "carlos@email.com",
+      "userType": "Usuário Comum",
+      "age": 25
+    },
+    {
+      "id": "3",
+      "name": "Ana",
+      "email": "ana@email.com",
+      "userType": "Usuário Comum",
+      "age": 28
+    },
+    {
+      "id": "4",
+      "name": "Pedro",
+      "email": "pedro@email.com",
+      "userType": "Usuário Comum",
+      "age": 22
+    },
+    {
+      "id": "5",
+      "name": "Sofia",
+      "email": "sofia@email.com",
+      "userType": "Administrador",
+      "age": 32,
+      "phone": ""
+    },
+    {
+      "id": "6",
+      "name": "João",
+      "email": "joao2@email.com",
+      "userType": "Administrador",
+      "age": 40
+    },
+    {
+      "id": "7",
+      "name": "Mariana",
+      "email": "mariana@email.com",
+      "userType": "Usuário Comum",
+      "age": 27
+    },
+    {
+      "id": "8",
+      "name": "Lucas",
+      "email": "lucas@email.com",
+      "userType": "Usuário Comum",
+      "age": 24
+    },
+    {
+      "id": "9",
+      "name": "Isabela",
+      "email": "isabela@email.com",
+      "userType": "Usuário Comum",
+      "age": 29
+    },
+    {
+      "id": "10",
+      "name": "Ricardo",
+      "email": "ricardo@email.com",
+      "userType": "Administrador",
+      "age": 37,
+      "phone": ""
+    },
+    {
+      "id": "11",
+      "name": "Fernanda",
+      "email": "fernanda@email.com",
+      "userType": "Administrador",
+      "age": 33
+    },
+    {
+      "id": "12",
+      "name": "Luis",
+      "email": "luis@email.com",
+      "userType": "Usuário Comum",
+      "age": 26
+    },
+    {
+      "id": "13",
+      "name": "Paula",
+      "email": "paula@email.com",
+      "userType": "Usuário Comum",
+      "age": 31
+    },
+    {
+      "id": "14",
+      "email": "yurisamp123@gmail.com",
+      "name": "teste",
+      "userType": "Administrador",
+      "age": 21,
+      "phone": "(11) 11111-11__"
+    },
+    {
+      "id": "15",
+      "email": "yurisamp123@gmail.com",
+      "name": "teste2",
+      "userType": "Administrador",
+      "age": 34,
+      "phone": "(11) 11111-1111"
+    }
+  ]
+}
