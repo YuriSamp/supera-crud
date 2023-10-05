@@ -60,8 +60,6 @@ const DataTable = ({ data, setPage, page, onOpen, setId, isFiltered }: TableProp
     { to: null, label: 'Excluir', onClick: () => onDelete(String(item.id)), }
   ]
 
-  console.log(page)
-
   return (
     <TableContainer sx={styles.tableContainer}>
       <Table variant='simple' w={'full'}>

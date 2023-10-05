@@ -5,6 +5,7 @@ import { user } from '../types/user'
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters, useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 import { getFilteredusers } from '../services/http/requests'
+import { API_DEFAULT_ERROR } from '../config/constants'
 
 const styles: Record<string, SystemStyleObject> = {
   container: {
@@ -48,7 +49,7 @@ const Filters = ({ setUsers, refetch, setIsFiltered }: Props) => {
       setIsFiltered(true)
     },
     onError: () => {
-      toast.error('Algo deu errado, tente novamente')
+      toast.error(API_DEFAULT_ERROR)
     }
   })
 

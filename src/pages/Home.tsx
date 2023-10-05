@@ -9,6 +9,7 @@ import DeleteDialog from '../components/alert-dialog'
 import Filters from '../components/filters'
 import { toast } from 'react-toastify'
 import { getAllUsers } from '../services/http/requests'
+import { API_DEFAULT_ERROR } from '../config/constants'
 
 
 const styles: Record<string, SystemStyleObject> = {
@@ -33,7 +34,7 @@ const Home = () => {
     queryKey: ['users', page],
     queryFn: () => getAllUsers(page),
     onError: () => {
-      toast.error('Ocorreu um erro ao fazer a requisição para o banco de dados')
+      toast.error(API_DEFAULT_ERROR)
     },
     onSuccess: (userList: user[]) => {
       setUsers(userList)

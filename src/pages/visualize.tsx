@@ -5,6 +5,8 @@ import FormBody from '../components/form';
 import { user } from '../types/user';
 import { useQuery } from '@tanstack/react-query';
 import { getUniqueUser } from '../services/http/requests';
+import { toast } from 'react-toastify';
+import { API_DEFAULT_ERROR } from '../config/constants';
 
 const styles: Record<string, SystemStyleObject> = {
   container: {
@@ -23,7 +25,10 @@ const Visualize = () => {
 
   const { data: user } = useQuery({
     queryFn: () => getUniqueUser(String(id)),
-    queryKey: ['user', id]
+    queryKey: ['user', id],
+    onError: () => {
+      toast.error(API_DEFAULT_ERROR)
+    }
   })
 
   return (

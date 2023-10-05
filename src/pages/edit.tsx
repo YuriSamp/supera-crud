@@ -14,6 +14,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { user } from '../types/user';
 import { useEffect } from 'react';
 import { updateUser } from '../services/http/requests';
+import { API_DEFAULT_ERROR } from '../config/constants';
 
 
 const formSchema = yup.object({
@@ -91,7 +92,7 @@ const Edit = () => {
       }, 1000)
     },
     onError: () => {
-      toast.error('Algo deu errado, tente novamente')
+      toast.error(API_DEFAULT_ERROR)
     }
   })
 

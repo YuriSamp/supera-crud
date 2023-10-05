@@ -14,6 +14,7 @@ import { toast } from 'react-toastify';
 import { user } from '../types/user'
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters, useMutation, useQueryClient } from '@tanstack/react-query'
 import { removeUser } from '../services/http/requests';
+import { API_DEFAULT_ERROR } from '../config/constants';
 
 type Refetch = <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<user[], unknown>>
 
@@ -51,7 +52,7 @@ const DeleteDialog = ({ isOpen, onClose, id, user, refetch }: Props) => {
       onClose()
     },
     onError: () => {
-      toast.error('Algo deu errado, tente novamente')
+      toast.error(API_DEFAULT_ERROR)
     }
   },)
 

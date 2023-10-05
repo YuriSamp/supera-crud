@@ -10,6 +10,7 @@ import FormBody from '../components/form';
 import { ROUTES } from '../config/routes';
 import { useMutation } from '@tanstack/react-query';
 import { addUser } from '../services/http/requests';
+import { API_DEFAULT_ERROR } from '../config/constants';
 
 const formSchema = yup.object({
   id: yup.string().optional(),
@@ -62,7 +63,7 @@ const Create = () => {
       }, 1000)
     },
     onError: () => {
-      toast.error('Algo deu errado,tente novamente')
+      toast.error(API_DEFAULT_ERROR)
     }
   },)
 
